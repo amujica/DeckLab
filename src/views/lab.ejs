@@ -23,11 +23,19 @@
           <img src="./img/cards/KC.png" width="8%" height="8%">
           <img src="./img/cards/7S.png" width="8%" height="8%">
           <img src="./img/cards/2D.png" width="8%" height="8%">
+          <img src="./img/cards/QC.png" width="8%" height="8%" >
+          <img src="./img/cards/AC.png" width="8%" height="8%">
+          <img src="./img/cards/KC.png" width="8%" height="8%">
+          <img src="./img/cards/7S.png" width="8%" height="8%">
+          <img src="./img/cards/2D.png" width="8%" height="8%">
+          <img src="./img/cards/QC.png" width="8%" height="8%" >
+          
+         
         </div>
       
         <div  class="p-3 mb-2">
-          <button> Faro Exterior</button>
-          <button> Faro Interior</button>
+          <button onclick="faroExt()"> Faro Exterior</button>
+          <button onclick="faroInt()"> Faro Interior</button>
           <button> Cortar por la carta n</button>
           <button> Random Shuffle</button>
           <button> Poner la carta x en la posicion y (Delante del )</button>
@@ -35,22 +43,53 @@
       
       
         </div>
-        <div class="card">
+        <div class="card ml-2 border border-secondary" >
           <h5 class="card-header">Current combination</h5>
-          <div class="card-body">
+          <div class=" d-flex flex-row border-top border-secondary">
+          <div class="card-body" >
+            <p class="card-text" id="currentComb"> <strong> Mnemonica</strong> --> Faro Shuffle Int -->
+              Faro Shuffle Ext --> Cut by 5 Hearts --> Faro Shuffle Ext --> <strong>Aronson</strong>--> Cut by A Spades
+              --> Faro Shuffle Int --> <strong>New Deck Order </strong></p>
+            
+          </div>
+          <div class="p-3 mb-2 ml-1 mr-2 mt-2 " style="text-align: center;">
+            <button class="btn-info mt-1 mr-1 ml-1 mb-1">Add to My Combinations</button>
+            <button class="btn-info" onclick="clearDiv()">Clear</button>
+          </div>
+        </div>
+        </div>
+        
+       
+
+        <div class="card ml-2 mt-1 mb-2 border border-secondary">
+          <h5 class="card-header">Your combinations - Here we will have a Carousel</h5> 
+          <div class="card-body border-top border-secondary">
             <p class="card-text"> <strong> Mnemonica</strong> --> Faro Shuffle Int -->
             Faro Shuffle Ext --> Cut by 5 Hearts --> Faro Shuffle Ext --> <strong>Aronson</strong>--> Cut by A Spades
             --> Faro Shuffle Int --> <strong>New Deck Order </strong></p>
-            <a href="#" class="btn btn-primary">Add to My Combinations</a>
           </div>
         </div>
-          
           
       
 </body>
 <script>
+function clearDiv() {
+    var child = document.getElementById("currentComb");
+    child.innerHTML = "";
+}
 
-
+function faroExt() {
+    var child = document.getElementById("currentComb");
+    child.innerHTML = child.innerHTML + " --> Faro Exterior";
+    
+}
+function faroInt() {
+    var child = document.getElementById("currentComb");
+    child.innerHTML = child.innerHTML + " --> Faro Interior";
+    
+}
 
 </script>
+
+<%- include("partials/footer")%>
 </html>

@@ -33,4 +33,9 @@ router.get('/profile', (req, res) => {
     
     res.render('profile');
 });
+
+router.get('/contact', (req, res) => {
+    
+    res.render('contact');
+});
 module.exports = router
