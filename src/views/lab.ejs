@@ -6,63 +6,86 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DeckLab</title>
     
+   
 </head>
 <body>
-
+  
     <%- include("partials/head")%>
     <%- include("partials/navigation") %>
-    <div class="p-3 mb-0 ml-5 mr-5 mt-0">
-      <h3>Laboratory</h3>
-    </div>
-      <div class="p-3 mb-2 ml-5 mr-5 mt-0 text-white shadow-lg " style="border-radius: 15px; background-color: #088A29;" > 
-        
-        <div class="p-3 mb-2">
+    
+    <!--TÍTULO-------------------------------------------------------------------->
+
+      <div class="p-3 mb-0 ml-5 mr-5 mt-0">
+        <h3>  Laboratory</h3>
+      </div>
+
+
+      <!--TAPETE ----------------------------------------------------------------->
+      <div class="tapete p-3 mb-2 ml-5 mr-5 mt-0 text-white shadow-lg"> 
+          
+        <div >
+          <div class="naipe" ><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          <div class="naipe"><img src="/img/cards/7S.png" > </div>
+          <div class="naipe"><img src="/img/cards/2D.png" > </div>
+          
+
          
-          <img src="./img/cards/QC.png" width="8%" height="8%" >
-          <img src="./img/cards/AC.png" width="8%" height="8%">
-          <img src="./img/cards/KC.png" width="8%" height="8%">
-          <img src="./img/cards/7S.png" width="8%" height="8%">
-          <img src="./img/cards/2D.png" width="8%" height="8%">
-          <img src="./img/cards/QC.png" width="8%" height="8%" >
-          <img src="./img/cards/AC.png" width="8%" height="8%">
-          <img src="./img/cards/KC.png" width="8%" height="8%">
-          <img src="./img/cards/7S.png" width="8%" height="8%">
-          <img src="./img/cards/2D.png" width="8%" height="8%">
-          <img src="./img/cards/QC.png" width="8%" height="8%" >
+          
+        </div>
+
+          <div  class="p-3 mb-2">
+            <button onclick="faroExt()"> Faro Exterior</button>
+            <button onclick="faroInt()"> Faro Interior</button>
+            <button> Cortar por la carta n</button>
+            <button> Random Shuffle</button>
+            <button> Poner la carta x en la posicion y (Delante del )</button>
+            <button> Clear last operation</button>
+          </div>
+        
           
          
-        </div>
+      </div>
       
-        <div  class="p-3 mb-2">
-          <button onclick="faroExt()"> Faro Exterior</button>
-          <button onclick="faroInt()"> Faro Interior</button>
-          <button> Cortar por la carta n</button>
-          <button> Random Shuffle</button>
-          <button> Poner la carta x en la posicion y (Delante del )</button>
-          <button> Clear last operation</button>
-        </div>
+       
+     
+
+      <!--CURRENT COMBINATION--------------------------------------------->
       
-      
-        </div>
-        <div class="card ml-2 border border-secondary"  >
-          <h5 class="card-header">Current combination</h5>
-          <div class=" d-flex flex-row border-top border-secondary">
+      <div class="card ml-2 border border-secondary"  >
+        <h5 class="card-header">Current combination</h5>
+        <div class=" d-flex flex-row border-top border-secondary">
           <div class="card-body" >
             <p class="card-text" id="currentComb"> 
 
             </p>
+              
+          </div>
             
-          </div>
           <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
-            <button class="btn-info mb-1 ml-1 mr-1 mt-1 " data-toggle="tooltip" data-html="true" title="Add combination and it will appear in your saved combinations">Add new combination</button>
-            <button class="btn-info mb-1 ml-1 mr-1 mt-1" data-toggle="tooltip" data-html="true" title="Add combination and stack appearing in the screen and they will appear in your saved combinations and stacks">Add stack and combination</button>
-            <button class="btn-info mb-1 ml-1 mr-1 mt-1 " data-toggle="tooltip" data-html="true" title="Clear current combination on screen" style="align-self: center;" onclick="clearDiv()">Clear</button>
+              <button class="btn-info mb-1 ml-1 mr-1 mt-1 " data-toggle="tooltip" data-html="true" title="Add combination and it will appear in your saved combinations">Add new combination</button>
+              <button class="btn-info mb-1 ml-1 mr-1 mt-1" data-toggle="tooltip" data-html="true" title="Add combination and stack appearing in the screen and they will appear in your saved combinations and stacks">Add stack and combination</button>
+              <button class="btn-info mb-1 ml-1 mr-1 mt-1 " data-toggle="tooltip" data-html="true" title="Clear current combination on screen" style="align-self: center;" onclick="clearDiv()">Clear</button>
           </div>
         </div>
-        </div>
+      </div>
         
        
-
+      <!--YOUR COMBINATIONS------------------------------------------------------------------->
         <div class="card ml-2 mt-1 mb-2 border border-secondary">
           <h5 class="card-header">Your combinations - Here we will have a Carousel</h5> 
           <div class="card-body border-top border-secondary">
@@ -72,7 +95,7 @@
           </div>
         </div>
           
-      
+       
 </body>
 <script>
 function clearDiv() {

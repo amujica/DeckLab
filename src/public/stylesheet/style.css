@@ -1,11 +1,26 @@
 
 
+
 .tapete {
-    border-radius: 15px;
-    background-color: #088A08;
-    color:white;
-    margin-top: auto;
-    margin-left:auto ;
-    margin-bottom: auto;
-    margin-right: auto;
+  /* display: flex; */ 
+  border-radius: 15px; 
+  background-color: #088A29;
+  overflow: hidden;
+      
+      }
+
+.naipe {
+  width: 1%;
+  height: 1%;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.img {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: auto;
   }
+
+ 
