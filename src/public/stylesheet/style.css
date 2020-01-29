@@ -7,11 +7,11 @@
   background-color: #088A29;
   overflow: hidden;
       
-      }
+}
 
 .naipe {
-  width: 1%;
-  height: 1%;
+  width: 1.5%;
+  height: 1.5%;
   display: inline-block;
   margin-right: 1%;
 }
