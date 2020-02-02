@@ -2,25 +2,51 @@
 
 
 .tapete {
-  /* display: flex; */ 
+  display: flex; 
   border-radius: 15px; 
   background-color: #088A29;
-  overflow: hidden;
+  flex-direction: column;
+  
+  
       
 }
 
 .naipe {
-  width: 1.5%;
-  height: 1.5%;
+  width: 0.7%;
+  height: 0.7%;
   display: inline-block;
   margin-right: 1%;
+  
+ 
 }
 
-.img {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  z-index: auto;
-  }
+.operations {
+  display: flex; 
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  
+       
+}
+.naipes{
+  background-color: #088A29;
+ 
+  
+}
 
+
+/* Proporcion en px 226 * 314 
+Mirar como arreglar el tema del navegador
+Posicionar las cartas correctamente: position:relative?
+Como hacer que tras las operaciones no se vayan menguando, random shuffle luego está todo igual, por qué?
+Solo expandido con new deck order
+Hacer responsive usar chrome inspeccionar
+Mensaje para girar pantalla desde móvil 
+https://uniwebsidad.com/foro/pregunta/339/como-hacer-que-una-web-se-abra-en-horizontal-al-acceder-con-el-movil/*/
+.naipeImg{
+  width: 132.94px;
+  height: 184.7px;
+  
+
+}
  
