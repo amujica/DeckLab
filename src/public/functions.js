@@ -43,13 +43,36 @@ $(function () {
  });
 
  $(function () {
-   $('#cut').on('click', function () {
-    divCurr.text(divCurr.text() + " --> Cortar por 3");
+  $('#cut').on('click', function () {
+    var num = parseInt($('#cortadas').val());
+    
+    divCurr.text(divCurr.text() + " --> Cut in card " + num);
 
-    $( ".naipes div:nth-child(3)" ).before( $( ".naipes div:nth-child(50)" ) );
+    $( ".naipe" ).each(function(index,element) {
+      console.log(index)
+      if(index<num){
+        $( ".naipes div:nth-child(1)" ).insertAfter( $( ".naipes div:nth-child(52)" ) );
+        
+      }
+    })
+  });
+});
 
-   });
- });
+$(function () {
+  $('#change').on('click', function () {
+    var num = parseInt($('#cambiadas').val());
+    var num1 = parseInt($('#cambiadas1').val()) + 1;
+
+    
+    divCurr.text(divCurr.text() + " --> Put card " + num + " in position " + num1);
+
+    $( ".naipes div:nth-child(" + num1 + ")" ).before( $( ".naipes div:nth-child(" + num + ")" ) );
+    
+    
+    
+  });
+});
+
 
  $(function () {
   $('#shuffle').on('click', function () {
@@ -89,19 +112,23 @@ $(function () {
     }
 
     if (stck == "New Deck Order"){
-      newdeck();
+      newdeck(0);
       
     }
 
+    if (stck == "Mnemonica"){
+      newdeck(2);
+      
+    }
   });
 });
 
 function shuffle() {
   $(".naipes").each(function(){
     var divs = $(this).find('div');
-    for(var i = 0; i < divs.length; i++) $(divs[i]).remove();   //Borra el elemento del DOM    
-        
-    //the fisher yates algorithm, from http://stackoverflow.com/questions/2450954/how-to-randomize-a-javascript-array
+    for(var i = 0; i < divs.length; i++) $(divs[i]).remove();  
+
+    
     var i = divs.length;
     if ( i == 0 ) return false;
     while ( --i ) {
@@ -116,11 +143,12 @@ function shuffle() {
 });   
 }
 
-function newdeck(){
+function newdeck(n){
  
     var myArray = $(".naipes div").sort(function (a, b) {
-      a = parseInt($(a).attr('id'));
-      b = parseInt($(b).attr('id'));
+      a = parseInt($(a).attr('id').slice(n,n+2));
+      b = parseInt($(b).attr('id').slice(n,n+2));
+      console.log(a)
       return a - b;
       
     }).each(function() {
@@ -129,8 +157,8 @@ function newdeck(){
       $(elem).appendTo(".naipes");
     });
     
-    //$(".naipes").append(myArray);
+   
 
 }
 
-newdeck();
+newdeck(0);
