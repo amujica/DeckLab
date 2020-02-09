@@ -1,6 +1,5 @@
 
 
-
 .tapete {
   display: flex; 
   border-radius: 15px; 
@@ -41,7 +40,19 @@
   justify-content: center;
 
 }
+.selectable .ui-selecting {
+  
+  /*margin-bottom: 20px;*/
+  background-color: orange;
+  
+}
 
+.selectable .ui-selected {
+  background-color: orange;
+ /*margin-bottom: 20px;*/
+  
+  
+}
 
 /* Proporcion en px 226 * 314 
 Mirar como arreglar el tema del navegador

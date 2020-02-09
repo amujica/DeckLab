@@ -4,7 +4,8 @@ var divOrigen = $('#stackOrigen');
 
 $(function () {
   $('#invertir').on('click', function () {
-    var num = parseInt($('#invertidas').val());
+    var num = $(".ui-selected").length
+    console.log(num)
     var lim = Math.floor(num/2);
     divCurr.text(divCurr.text() + " --> Inverse " + num + " cards");
 
@@ -41,8 +42,10 @@ $(function () {
      divCurr.text("");
    });
  });
+ 
 
- $(function () {
+
+/* $(function () {
   $('#cut').on('click', function () {
     var num = parseInt($('#cortadas').val());
     
@@ -56,7 +59,7 @@ $(function () {
       }
     })
   });
-});
+});*/
 
 $(function () {
   $('#change').on('click', function () {
@@ -79,7 +82,7 @@ $(function () {
     
     $(".naipes").each(function(){
       var divs = $(this).find('div');
-      console.log(divs)
+      //console.log(divs)
       for(var i = 0; i < divs.length; i++) $(divs[i]).remove();   //Borra el elemento del DOM    
           
       //the fisher yates algorithm, from http://stackoverflow.com/questions/2450954/how-to-randomize-a-javascript-array
@@ -99,7 +102,7 @@ $(function () {
   });
  });
 
- $(function () {
+ /*$(function () {
   $('#apply_stack').on('click', function () {
 
     var stck = $('#stacks').val()
@@ -121,7 +124,7 @@ $(function () {
       
     }
   });
-});
+});*/
 
 function shuffle() {
   $(".naipes").each(function(){
@@ -148,7 +151,7 @@ function newdeck(n){
     var myArray = $(".naipes div").sort(function (a, b) {
       a = parseInt($(a).attr('id').slice(n,n+2));
       b = parseInt($(b).attr('id').slice(n,n+2));
-      console.log(a)
+      //console.log(a)
       return a - b;
       
     }).each(function() {
@@ -161,4 +164,68 @@ function newdeck(n){
 
 }
 
+function sortDom(selectorArray) {
+  while (selectorArray.length) {
+      let $el = $(selectorArray.pop());
+      $el.parent().prepend($el);
+  }
+}
+ 
+
+$('#apply_stack').on('click', function () {
+  var stck = $('#stacks').val()
+    divOrigen.text(stck).css( 'font-weight', 'bold' );
+    divCurr.text("");
+
+    if (stck == "New Deck Order"){
+      sortDom(['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10', 
+  '#11', '#12', '#13', '#14', '#15', '#16', '#17', '#18', '#19', '#20',
+  '#21', '#22', '#23', '#24', '#25', '#26', '#27', '#28', '#29', '#30', '#31', '#32', '#33', 
+  '#34', '#35', '#36', '#37', '#38', '#39', '#40', '#41', '#42', '#43', '#44', 
+  '#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',]);
+      
+    }
+
+    if (stck == "Randomly Shuffled"){
+      shuffle();
+      
+    }
+    if (stck == "Mnemonica"){
+      sortDom(['#17', '#02', '#33', '#16', '#04', '#34', '#52', '#05', '#44', '#51', 
+  '#12', '#37', '#25', '#08', '#47', '#48', '#09', '#26', '#38', '#11',
+  '#50', '#45', '#06', '#23', '#35', '#27', '#15', '#03', '#32', '#18', '#40', '#29', '#21', 
+  '#43', '#13', '#24', '#46', '#10', '#39', '#49', '#07', '#36', '#14', '#22', 
+  '#42', '#41', '#20', '#28', '#30', '#19', '#01', '#31', ]);
+      
+    }
+  
+});
+$( function() {
+  $( ".selectable" ).selectable();
+} );
+//https://codepen.io/codesnips/pen/QNYoyv
+//http://www.tutorialspark.com/jqueryUI/jQuery_UI_Selectable_Interaction.php
 newdeck(0);
+
+
+$(function () {
+  $('#cut').on('click', function () {
+    var num = $(".ui-selected").length
+    console.log(num)
+    
+    
+    //$(".ui-selected").each(obj, function() {
+    //}
+    
+    divCurr.text(divCurr.text() + " --> Cut in card " + num);
+
+    
+    $( ".naipe" ).each(function(index,element) {
+      
+      if(index<num){
+        $( ".naipes div:nth-child(1)" ).insertAfter( $( ".naipes div:nth-child(52)" ) );
+        
+      }
+    })
+  });
+});
