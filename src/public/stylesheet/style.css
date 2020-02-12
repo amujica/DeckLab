@@ -1,13 +1,15 @@
 
-
 .tapete {
-  display: flex; 
+ 
   border-radius: 15px; 
   background-color: #088A29;
-  flex-direction: column;
-  
-  
-      
+  /*background-image: url('../img/tapete-noise-2.png');*/
+
+}
+
+.tapete :first-child{
+  margin-left: 6px;
+
 }
 
 .naipe {
@@ -15,20 +17,23 @@
   height: 0.7%;
   display: inline-block;
   margin-right: 1%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
   
  
 }
 
 .operations {
   display: flex; 
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   
        
 }
 .naipes{
-  background-color: #088A29;
+  background-color: white;
  
   
 }
@@ -40,19 +45,22 @@
   justify-content: center;
 
 }
-.selectable .ui-selecting {
+.selectable .ui-selecting .naipeImg{
   
-  /*margin-bottom: 20px;*/
-  background-color: orange;
+  /*margin-bottom: 20px;
+  background-color: orange;*/
+  
+  border: 5px solid transparent;  
   
 }
 
-.selectable .ui-selected {
-  background-color: orange;
- /*margin-bottom: 20px;*/
-  
-  
+.selectable .ui-selected .naipeImg {
+  /*background-colofilter:blur(5px);r: orange;
+20% filter: drop-shadow(grey);*/
+border: 5px solid transparent;  
 }
+
+
 
 /* Proporcion en px 226 * 314 
 Mirar como arreglar el tema del navegador
@@ -65,6 +73,7 @@ https://uniwebsidad.com/foro/pregunta/339/como-hacer-que-una-web-se-abra-en-hori
 .naipeImg{
   width: 132.94px;
   height: 184.7px;
+  
   
 
 }

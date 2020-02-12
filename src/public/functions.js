@@ -4,7 +4,10 @@ var divOrigen = $('#stackOrigen');
 
 $(function () {
   $('#invertir').on('click', function () {
-    var num = $(".ui-selected").length
+    var num = $(".ui-selected .naipeImg").length
+    
+    
+
     console.log(num)
     var lim = Math.floor(num/2);
     divCurr.text(divCurr.text() + " --> Inverse " + num + " cards");
@@ -12,11 +15,19 @@ $(function () {
     $( ".naipe" ).each(function(index,element) {
       if (index < lim ){
         index1 = index + 1
-        $( ".naipes div:nth-child(" + num + ")" ).before( $( ".naipes div:nth-child(" + index1 + ")" ) );
-        $( ".naipes div:nth-child(" + index1 + ")" ).before( $( ".naipes div:nth-child(" + num + ")" ) );
+        $( ".tapete div:nth-child(" + num + ")" ).before( $( ".tapete div:nth-child(" + index1 + ")" ) );
+        $( ".tapete div:nth-child(" + index1 + ")" ).before( $( ".tapete div:nth-child(" + num + ")" ) );
         num--  
       }
     })
+    
+    setTimeout(() => {  
+      $(".ui-selected").each(function(index,element) {
+        element.classList.remove("ui-selected");
+      })
+     }, 1500);
+    
+    
   });
 });
 
@@ -69,7 +80,7 @@ $(function () {
     
     divCurr.text(divCurr.text() + " --> Put card " + num + " in position " + num1);
 
-    $( ".naipes div:nth-child(" + num1 + ")" ).before( $( ".naipes div:nth-child(" + num + ")" ) );
+    $( ".tapete div:nth-child(" + num1 + ")" ).before( $( ".tapete div:nth-child(" + num + ")" ) );
     
     
     
@@ -80,9 +91,9 @@ $(function () {
  $(function () {
   $('#shuffle').on('click', function () {
     
-    $(".naipes").each(function(){
+    $(".tapete").each(function(){
       var divs = $(this).find('div');
-      //console.log(divs)
+      console.log(divs)
       for(var i = 0; i < divs.length; i++) $(divs[i]).remove();   //Borra el elemento del DOM    
           
       //the fisher yates algorithm, from http://stackoverflow.com/questions/2450954/how-to-randomize-a-javascript-array
@@ -146,11 +157,11 @@ function shuffle() {
 });   
 }
 
-function newdeck(n){
+function newdeck(){
  
     var myArray = $(".naipes div").sort(function (a, b) {
-      a = parseInt($(a).attr('id').slice(n,n+2));
-      b = parseInt($(b).attr('id').slice(n,n+2));
+      a = parseInt($(a).attr('id'));
+      b = parseInt($(b).attr('id'));
       //console.log(a)
       return a - b;
       
@@ -205,12 +216,12 @@ $( function() {
 } );
 //https://codepen.io/codesnips/pen/QNYoyv
 //http://www.tutorialspark.com/jqueryUI/jQuery_UI_Selectable_Interaction.php
-newdeck(0);
+
 
 
 $(function () {
   $('#cut').on('click', function () {
-    var num = $(".ui-selected").length
+    var num = $(".ui-selected .naipeImg").length
     console.log(num)
     
     
@@ -223,9 +234,22 @@ $(function () {
     $( ".naipe" ).each(function(index,element) {
       
       if(index<num){
-        $( ".naipes div:nth-child(1)" ).insertAfter( $( ".naipes div:nth-child(52)" ) );
+        $( ".tapete div:nth-child(1)" ).insertAfter( $( ".tapete div:nth-child(52)" ) );
         
       }
     })
+
+    setTimeout(() => {  
+      $(".ui-selected").each(function(index,element) {
+        element.classList.remove("ui-selected");
+      })
+     }, 1500);
   });
 });
+
+
+sortDom(['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10', 
+  '#11', '#12', '#13', '#14', '#15', '#16', '#17', '#18', '#19', '#20',
+  '#21', '#22', '#23', '#24', '#25', '#26', '#27', '#28', '#29', '#30', '#31', '#32', '#33', 
+  '#34', '#35', '#36', '#37', '#38', '#39', '#40', '#41', '#42', '#43', '#44', 
+  '#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',]);
