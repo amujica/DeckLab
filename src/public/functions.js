@@ -1,6 +1,7 @@
 
 var divCurr = $('#currentComb');
 var divOrigen = $('#stackOrigen');
+var divDestino = $('#stackDestino');
 
 $(function () {
   $('#invertir').on('click', function () {
@@ -27,26 +28,18 @@ $(function () {
       })
      }, 1500);
     
-    
+     $('#cut').prop("disabled",true);
+     $('#invertir').prop("disabled",true);
+     $('#faroExtPar').prop("disabled",true);
+     $('#faroIntPar').prop("disabled",true);
+     $('#faroExt').prop("disabled",false);
+    $('#faroInt').prop("disabled",false);
+    checkCurrDeck()
   });
 });
 
 
-$(function () {
-    $('#faroExt').on('click', function () {
-      divCurr.text(divCurr.text() + " --> Faro Exterior");
 
-      $( ".naipes div:nth-child(1)" ).before( $( ".naipes div:nth-child(2)" ) );
-      //Esto es en verdad poner carta n en m! con n=1 y m=2. Desarrollar eso con un selector
-
-    });
-  });
-
-$(function () {
-   $('#faroInt').on('click', function () {
-     divCurr.text(divCurr.text() + " --> Faro Interior");
-   });
- });
 
 $(function () {
    $('#clear').on('click', function () {
@@ -176,24 +169,51 @@ function newdeck(){
 }
 
 function sortDom(selectorArray) {
-  while (selectorArray.length) {
-      let $el = $(selectorArray.pop());
+  
+    for(var i = 1; i <= selectorArray.length; i++){
+      let $el = $(selectorArray[selectorArray.length-i]);
       $el.parent().prepend($el);
-  }
+
+    }
+      
+  
 }
  
 
+
+var newdeckorder = ['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10', 
+'#11', '#12', '#13', '#14', '#15', '#16', '#17', '#18', '#19', '#20',
+'#21', '#22', '#23', '#24', '#25', '#26', '#27', '#28', '#29', '#30', '#31', '#32', '#33', 
+'#34', '#35', '#36', '#37', '#38', '#39', '#40', '#41', '#42', '#43', '#44', 
+'#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',]
+
+var mnemonica = ['#17', '#02', '#33', '#16', '#04', '#34', '#52', '#05', '#44', '#51', 
+'#12', '#37', '#25', '#08', '#47', '#48', '#09', '#26', '#38', '#11',
+'#50', '#45', '#06', '#23', '#35', '#27', '#15', '#03', '#32', '#18', '#40', '#29', '#21', 
+'#43', '#13', '#24', '#46', '#10', '#39', '#49', '#07', '#36', '#14', '#22', 
+'#42', '#28', '#20', '#41', '#30', '#19', '#01', '#31', ]
+
+var newdeckorder1 = ['#13', '#12', '#11', '#10', '#09', '#08', '#07', '#06', '#05', '#04', 
+'#03', '#02', '#01', '#40', '#41', '#42', '#43', '#44', '#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',
+'#27', '#28', '#29', '#30', '#31', '#32', '#33', '#34', '#35', '#36', '#37', '#38', '#39', 
+'#26', '#25', '#24', '#23', '#22', '#21', '#20',
+'#19', '#18', '#17', '#16', '#15', '#14', 
+
+]
+
 $('#apply_stack').on('click', function () {
   var stck = $('#stacks').val()
-    divOrigen.text(stck).css( 'font-weight', 'bold' );
-    divCurr.text("");
+  divOrigen.text(stck).css( 'font-weight', 'bold' );
+  divCurr.text("");
+
+    
+    $(".ui-selected").each(function(index,element) {
+      element.classList.remove("ui-selected");
+    })
+  
 
     if (stck == "New Deck Order"){
-      sortDom(['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10', 
-  '#11', '#12', '#13', '#14', '#15', '#16', '#17', '#18', '#19', '#20',
-  '#21', '#22', '#23', '#24', '#25', '#26', '#27', '#28', '#29', '#30', '#31', '#32', '#33', 
-  '#34', '#35', '#36', '#37', '#38', '#39', '#40', '#41', '#42', '#43', '#44', 
-  '#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',]);
+      sortDom(newdeckorder);
       
     }
 
@@ -202,17 +222,41 @@ $('#apply_stack').on('click', function () {
       
     }
     if (stck == "Mnemonica"){
-      sortDom(['#17', '#02', '#33', '#16', '#04', '#34', '#52', '#05', '#44', '#51', 
-  '#12', '#37', '#25', '#08', '#47', '#48', '#09', '#26', '#38', '#11',
-  '#50', '#45', '#06', '#23', '#35', '#27', '#15', '#03', '#32', '#18', '#40', '#29', '#21', 
-  '#43', '#13', '#24', '#46', '#10', '#39', '#49', '#07', '#36', '#14', '#22', 
-  '#42', '#41', '#20', '#28', '#30', '#19', '#01', '#31', ]);
+      sortDom(mnemonica);
       
     }
-  
+
+    if (stck == "New Deck Order 1"){
+      sortDom(newdeckorder1);
+      
+    }
 });
 $( function() {
-  $( ".selectable" ).selectable();
+  $( ".selectable" ).selectable({
+    selected: function() {
+      var num = $(".ui-selected .naipeImg").length
+      
+      if (num>1 && num<52){
+        $('#cut').prop("disabled",false);
+      }
+
+      if(num>1){
+        $('#invertir').prop("disabled",false);
+      }
+
+      if (num>1 && (num<26)){
+        $('#faroExtPar').prop("disabled",false);
+        $('#faroIntPar').prop("disabled",false);
+      }
+
+      if (num>1){
+        $('#faroExt').prop("disabled",true);
+        $('#faroInt').prop("disabled",true);
+      }
+
+    }
+  });
+  
 } );
 //https://codepen.io/codesnips/pen/QNYoyv
 //http://www.tutorialspark.com/jqueryUI/jQuery_UI_Selectable_Interaction.php
@@ -222,7 +266,7 @@ $( function() {
 $(function () {
   $('#cut').on('click', function () {
     var num = $(".ui-selected .naipeImg").length
-    console.log(num)
+  
     
     
     //$(".ui-selected").each(obj, function() {
@@ -244,6 +288,145 @@ $(function () {
         element.classList.remove("ui-selected");
       })
      }, 1500);
+
+     $('#cut').prop("disabled",true);
+     $('#invertir').prop("disabled",true);
+     $('#faroExtPar').prop("disabled",true);
+     $('#faroIntPar').prop("disabled",true);
+     $('#faroExt').prop("disabled",false);
+     $('#faroInt').prop("disabled",false);
+     checkCurrDeck()
+
+  });
+});
+
+function checkCurrDeck (){
+  var arr = fromNaipesToArray()
+  console.log(arr)
+  console.log(mnemonica)
+  
+  for (var i = 0; i < arr.length; ++i) {
+    if (arr[i] !== mnemonica[i]) {
+      console.log("Ocurrió lo inesperado: " + i)
+      console.log(arr[i])
+      console.log(mnemonica[i])
+      return;
+    }
+  }
+  
+    
+  divDestino.text("Mnemonica").css( 'font-weight', 'bold' );
+  
+
+}
+
+function fromNaipesToArray (){
+  
+  var arr = new Array();
+  $( ".naipe" ).each(function(index,element) {
+    index1 = index +1
+    
+   var n =  $( ".tapete div:nth-child(" + index1 + ")" ).attr('id')
+   arr.push('#' + n);
+    
+  })
+  
+  return arr
+}
+
+
+$(function () {
+  $('#faroExt').on('click', function () {
+    divCurr.text(divCurr.text() + " --> Faro Exterior");
+    var arr = fromNaipesToArray()
+    var half = arr.slice(0,26);
+    var otherhalf = arr.slice(26,53);
+
+    for (var i = 0; i < (arr.length/2); i++) {
+      arr[2*i] = half[i]
+      arr[2*i+1] = otherhalf[i]
+    }
+    
+    sortDom(arr)
+    
+  });
+});
+
+$(function () {
+  $('#faroInt').on('click', function () {
+    divCurr.text(divCurr.text() + " --> Faro Interior");
+    var arr = fromNaipesToArray()
+    var half = arr.slice(0,26);
+    var otherhalf = arr.slice(26,53);
+
+    for (var i = 0; i < (arr.length/2); i++) {
+      arr[2*i] = otherhalf[i]
+      arr[2*i+1] = half[i]
+    }
+    
+    sortDom(arr)
+    
+  });
+});
+
+$(function () {
+  $('#faroExtPar').on('click', function () {
+    
+
+    var num = $(".ui-selected .naipeImg").length
+
+    divCurr.text(divCurr.text() + " --> Faro Exterior Parcial (" + num + ")");
+    var arr = fromNaipesToArray()
+    var half = arr.slice(0,num);
+    var otherhalf = arr.slice(num,53);
+
+    console.log(half)
+    console.log(otherhalf)
+
+    for (var i = 0; i < num; i++) {
+      arr[2*i] = half[i]
+      arr[2*i+1] = otherhalf[i]
+    }
+
+    setTimeout(() => {  
+      $(".ui-selected").each(function(index,element) {
+        element.classList.remove("ui-selected");
+      })
+     }, 1500);
+
+    
+    sortDom(arr)
+    
+  });
+});
+
+$(function () {
+  $('#faroIntPar').on('click', function () {
+
+    var num = $(".ui-selected .naipeImg").length
+
+    divCurr.text(divCurr.text() + " --> Faro Interior Parcial (" + num + ")");
+    var arr = fromNaipesToArray()
+    var half = arr.slice(0,num);
+    var otherhalf = arr.slice(num,53);
+
+    console.log(half)
+    console.log(otherhalf)
+
+    for (var i = 0; i < num; i++) {
+      arr[2*i] = otherhalf[i]
+      arr[2*i+1] = half[i]
+    }
+
+    setTimeout(() => {  
+      $(".ui-selected").each(function(index,element) {
+        element.classList.remove("ui-selected");
+      })
+     }, 1500);
+
+    
+    sortDom(arr)
+    
   });
 });
 
@@ -253,3 +436,13 @@ sortDom(['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10',
   '#21', '#22', '#23', '#24', '#25', '#26', '#27', '#28', '#29', '#30', '#31', '#32', '#33', 
   '#34', '#35', '#36', '#37', '#38', '#39', '#40', '#41', '#42', '#43', '#44', 
   '#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',]);
+
+  $('#cut').prop("disabled",true);
+  $('#invertir').prop("disabled",true);
+  $('#faroExtPar').prop("disabled",true);
+  $('#faroIntPar').prop("disabled",true);
+  $('#faroExt').prop("disabled",false);
+  $('#faroInt').prop("disabled",false);
+
+  //Cuando deselecciono no se disabled!!s
+  //check current se borra mnemonica! Tras el cambio ya solo se puede usar una vez??

@@ -29,6 +29,7 @@
             <option value="Mnemonica">Mnemonica</option>
             <option value="Aronson">Aronson</option>
             <option value="New Deck Order">New Deck Order</option>
+            <option value="New Deck Order 1">New Deck Order (1)</option>
             <option value="Eight Kings">Eight Kings</option>
             <option value="Randomly Shuffled">Randomly Shuffled</option>
             <option value="Si Stebbins">Si Stebbins</option>
@@ -119,24 +120,25 @@
             <!--INVERTIR---->
          
           
-          <button   id="invertir"> Inverse</button>
+          <button class="btn btn-outline-dark ml-1 "  id="invertir" disabled> Inverse</button>
 
           <!--CORTAR---->
         
           
-          <button   id="cut"> Cut</button>
+          <button class="btn btn-outline-dark ml-1"  id="cut" disabled> Cut</button>
           
           <!--CHANGE CARD POSITION-->
 
-          <button  id="change"> Change</button>
+          <button class="btn btn-outline-dark ml-1  " id="change" disabled> Change</button>
 
-          <button  id="faroExt"> Faro Exterior</button>
-          <button  id="faroInt"> Faro Interior</button>      
+          <!--FARO SHUFFLE EXT-->
+          <button class="btn btn-outline-dark  ml-1 " id="faroExt"> Faro Exterior</button>
+          <button class="btn btn-outline-dark  ml-1 " id="faroInt"> Faro Interior</button>      
           
-          <button > Faro Exterior Parcial</button>
-          <button > Faro Interior Parcial</button>
-          <button > Antifaro</button>
-          <button > Clear last operation</button>
+          <button class="btn btn-outline-dark  ml-1 " id="faroExtPar" disabled> Faro Exterior Parcial</button>
+          <button class="btn btn-outline-dark  ml-1 " id="faroIntPar" disabled> Faro Interior Parcial</button>
+          <button class="btn btn-outline-dark  ml-1" > Antifaro</button>
+          <button class="btn btn-outline-dark  ml-1"> Clear last operation</button>
         
       </div>
       <div class="mb-3" style="text-align: center;">
@@ -157,7 +159,10 @@
             <p class="card-text" id="currentComb"> 
 
             </p>
-              
+            <p id="stackDestino"> 
+              <strong> </strong>
+
+            </p>
           </div>
             
           <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
