@@ -34,11 +34,21 @@
               tellus. Suspendisse nec justo ut enim malesuada tristique at vitae felis. Ut 
               id tortor risus. Pellentesque tempor est quis suscipit ullamcorper. Duis in mollis
                est, ut fermentum dui. 
+
+               Here we have an example on how to use this page to check how we can get Mnemonica from a New Deck Order 
+               (Sinfonía en Mnemonica Mayor Vol. I Juan Tamariz)
         </p>
         <div style="text-align: center;">
-            <img src="./img/example.png" width="50%" height="50%" style="justify-content: center;">  
+            <video width="70%" height="70%" controls>
+                <source src="./vid/mnemonica.mp4" type="video/mp4">
+                <source src="movie.ogg" type="video/ogg">
+                Your browser does not support the video tag.
+              </video>  
         </div>
-              
+        
+        
+
+          
     </div>
     
     
@@ -51,37 +61,53 @@
 
 
 <!--
-  1. Hacer que funcionen todas las funciones sobre las cartas. Mirar el método de shuffle,
-  hacer métodos haciendo copias del "array"? 
-    1.1 Métodos fáciles y que  pasan parámetros con dropdowns. Cortar, invertir...
-    1.2 Los demás: faros...
-    1.3 Detalles como que ponga carta entre parentesis en los desplegables
-    1.4 Desplegables directamente con botón
 
+  1. Clear Last
     
-    Selectable:
+   2. Selectable:
         Hacer que siempre tenga que ser desde la primera
         Que se seleccione bonito
         Que se pueda deseleccionar al clickar fuera
         Que se pueda arrastrar el raton desde fuera
 
-    Instrucciones en los botones disabled
-    Funcion cambiar carta que haya que dar a un botón antes para poder hacerlo, y que salga algo de "Now drag
-    a card into its new position"
-    Asegurar que mientras se opera en el lab se puede ver current combination y my combinations!
-    Hacer el tema de cuando se seleccionen cartas solo se habiliten botones que se puedan usar
+   3. Sorteable Jquery para cambiar de carta. "Now drag
+    a card into its new position" Que lo ponga en algún sitio cuando das al botó de activar. Hover? O que
+    salga encima de la baraja de manera intermitente en el mismo elemento donde sale el nombre de la 
+    baraja si llegaras o cuando se pone en origin stack
+
+   4. Inverso de todas las funciones
+
+    5. Jquery para que al clickar las cartas se extiendan. Que ponga "Haz click para extender cartas". 
+  Animaciones de las cartas al moverse
+
+   5. Descargar combinaciones y stacks y poder subirlos
+
+   6. Que cuando coincida con una baraja, o pase algo especial con el stack al que se llega, que salga
+    un mensaje delante de la baraja con efecto. Mejorar la manera en la que sale en "current combination"
+
+   7. Botón de reducir combinación y quitar botones que sobren de la caja de "current combination"
+
+   8. Mezcla mano, mezcla americana (pensar en qué lab va a estar)
+
+    9. Opción de meter jokers y de marcar cartas para seguirlas y darlas la vuelta (que se den
+    la vuelta y se vea el dorso pero que ponga qué carta es)
+
+    10. Barajas incompletas (Pensar en qué labs tienen sentido estas barajas)
+
+    11. Animaciones para cuando se muevan las cartas? 
+
+    12. Instrucciones en los botones disabled para guiar al usuario y sepa por qué están desactivados
+
+    13. Asegurar que mientras se opera en el lab se puede ver current combination y my combinations!
+
     Para cuando el usuario pinche fuera sin querer:
         https://www.geeksforgeeks.org/how-to-hide-a-div-when-the-user-clicks-outside-of-it-using-jquery/
-  2. Hacer funciones para poner un stack, que sea una sola función si es posible a la que le pasas
-  como parámetro el stack que quieres
 
-  3. Que se escriba todo en current combination y que dos operaciones que puedan resumirse en una
-  lo hagan.
 
-  4. Hacer estilos poniendo por un lado la elección del stack y luego las funciones disponibles
+    14. Esconder codigo cliente 
+    https://code-boxx.com/hide-javascript-code-from-client/
 
-  5. Jquery para que al clickar las cartas se extiendan. Que ponga "Haz click para extender cartas". 
-  Animaciones de las cartas al moverse
+ 
 
   6. Hacer estilos responsive y hacer que en caso de móvil aparezca el mensaje de "gira el móvil". 
   Subirlo a github.io para poder probar esas cosas y usar la herramienta esa de chrome.
@@ -97,11 +123,26 @@
     7.4 Hacer profile con una de esas cards con dos pestañas ("My stacks" y "My combinations")
 
 
-Barajas incompletas?
-Caja del poker?
-Destacar carta para seguirla
-Panel del poker
-Para hacer tus setups -- Operaciones para atrás
+
+
+
+Que el lab cambie para hacer distintos estudios: (nuevos botones o ver qué cambios hay que hacer)
+Que haya una parte común a todos (descargar baraja, el tapete igual...)
+
+    - Set up your deck
+    - General lab (para experimentar donde quedan cartas?)
+    - Poker/ card game (que se puedan hacer deals y al recoger ver qué se puede hacer con esa baraja)
+        Meter aquí la caja del poker, del black jack...etc
+    - Principio Gilbreath
+    - 
+    - Preguntar por más opciones!
+
+
+
+Para el algoritmo, combinaciones más fáciles que descubrir:
+
 Descubrir combinaciones del estilo: mnemonica a todas negras y rojas, menomica a 4 cartas juntas, a un palo junto y ordenado,
-combinacinoes de esas que son más faciles de encontrar!
+homologas una al lado de la otra, buscar cosas de poker (mnemonica a dar escalera real y a otro un poker). 
+
+Hacerlo con todas las operaciones pero solo probando 3 pasos. INcluida la operación de repartir una mano de poker
 -->
