@@ -88,13 +88,6 @@ function timeoutSelected(){
 /*
   ORIGIN STACK -----------------------------------------------------------------------------
 
-kinepoli
-stand 
-16:30 a 20:30
-antes de la peli
-brainstorming
-
-
 */
 
 $('#apply_stack').on('click', function () {
@@ -377,6 +370,37 @@ $(function () {
 $( function() {
   $( ".selectable" ).selectable({
     selected: function() {
+
+   
+
+    }
+
+    
+    
+  });
+  
+} );
+
+$( function() {
+  $( ".selectable" ).selectable({
+    unselected: function() {
+      
+      var num = $(".ui-selected .naipeImg").length
+
+      if (num==0){
+        disableButtons()
+      }
+
+    }
+
+  });
+  
+} );
+
+$( function() {
+  $( ".selectable" ).selectable({
+    stop: function() {
+
       var num = $(".ui-selected .naipeImg").length
       
       if (num>0 && num<52){
@@ -412,21 +436,16 @@ $( function() {
         disableButtons()
       }
 
-    }
 
-    
-  });
-  
-} );
 
-$( function() {
-  $( ".selectable" ).selectable({
-    unselected: function() {
-      var num = $(".ui-selected .naipeImg").length
-
-      if (num==0){
-        disableButtons()
+      var firstCard =  $(".naipe ")[0]
+      if (!firstCard.classList.contains("ui-selected") &&  $(".naipe ").hasClass("ui-selected")){
+        alert("Please select the first card among the selected ones. If you want to make an operation on some cards which are not in top, first cut the deck");
+        $(".ui-selected").each(function(index,element) {
+          element.classList.remove("ui-selected");
+        })
       }
+      
 
     }
 
