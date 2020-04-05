@@ -2,21 +2,22 @@
 var divCurr = $('#currentComb');
 var divOrigen = $('#stackOrigen');
 var divDestino = $('#stackDestino');
+var combinationArr = [];
 
 var newdeckorder = ['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10', 
 '#11', '#12', '#13', '#14', '#15', '#16', '#17', '#18', '#19', '#20',
-'#21', '#22', '#23', '#24', '#25', '#26', '#27', '#28', '#29', '#30', '#31', '#32', '#33', 
-'#34', '#35', '#36', '#37', '#38', '#39', '#40', '#41', '#42', '#43', '#44', 
+'#21', '#22', '#23', '#24', '#25', '#26','#27', '#28', '#29', '#30', '#31', '#32', '#33', 
+'#34', '#35', '#36', '#37', '#38', '#39','#40', '#41', '#42', '#43', '#44', 
 '#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',]
 
-var mnemonica = ['#17', '#02', '#33', '#16', '#04', '#34', '#52', '#05', '#44', '#51', 
-'#12', '#37', '#25', '#08', '#47', '#48', '#09', '#26', '#38', '#11',
-'#50', '#45', '#06', '#23', '#35', '#27', '#15', '#03', '#32', '#18', '#40', '#29', '#21', 
-'#43', '#13', '#24', '#46', '#10', '#39', '#49', '#07', '#36', '#14', '#22', 
-'#42', '#28', '#20', '#41', '#30', '#19', '#01', '#31', ]
+var mnemonica = ['#17', '#02', '#33', '#16', '#04', '#32', '#40', '#05', '#48', '#41', 
+'#12', '#29', '#25', '#08', '#45', '#44', '#09', '#26', '#28', '#11',
+'#42', '#47', '#06', '#23', '#31', '#39', '#15', '#03', '#34', '#18', '#52', '#37', '#21', 
+'#49', '#13', '#24', '#46', '#10', '#27', '#43', '#07', '#30', '#14', '#22', 
+'#50', '#38', '#20', '#51', '#36', '#19', '#01', '#35', ]
 
 var newdeckorder1 = ['#13', '#12', '#11', '#10', '#09', '#08', '#07', '#06', '#05', '#04', 
-'#03', '#02', '#01', '#40', '#41', '#42', '#43', '#44', '#45', '#46', '#47', '#48', '#49', '#50', '#51', '#52',
+'#03', '#02', '#01', '#52', '#51', '#50', '#49', '#48', '#47', '#46', '#45', '#44', '#43', '#42', '#41', '#40',
 '#27', '#28', '#29', '#30', '#31', '#32', '#33', '#34', '#35', '#36', '#37', '#38', '#39', 
 '#26', '#25', '#24', '#23', '#22', '#21', '#20',
 '#19', '#18', '#17', '#16', '#15', '#14', 
@@ -65,7 +66,7 @@ function checkCurrDeck (){
 }
 
 function disableButtons (){
-      $('#cut').prop("disabled",true);
+     $('#cut').prop("disabled",true);
      $('#invertir').prop("disabled",true);
      $('#faroExtPar').prop("disabled",true);
      $('#faroIntPar').prop("disabled",true);
@@ -73,6 +74,8 @@ function disableButtons (){
      $('#faroInt').prop("disabled",false);
      $('#antifaroInt').prop("disabled",false);
      $('#antifaroExt').prop("disabled",false);
+     $('#clearLast').prop("disabled",false);
+     
 
 }
 
@@ -81,10 +84,66 @@ function timeoutSelected(){
     $(".ui-selected").each(function(index,element) {
       element.classList.remove("ui-selected");
     })
-   }, 1500);
+   }, 1000);
 }
 
+
+function fromcombinationArrToText(){
+  
+  CurrentText = ""
+  
+
+  combinationArr.forEach(function add(element){
+    if (element.includes("cut")){
+      var num = element.replace( /^\D+/g, '')
+      CurrentText += " → Cut " + num + " cards";
+    }
+    else if (element.includes("inverse")){
+      var num = element.replace( /^\D+/g, '')
+      CurrentText += " → Inverse " + num + " cards";
+      
+    }
+    else if (element.includes("antifaroext")){
+      CurrentText += " → Out Antifaro ";
+
+      
+    }
+    else if (element.includes("antifaroint")){
+      CurrentText += " → Int Antifaro ";
+      
+    }
+    else if (element.includes("faroextpar")){
+      var num = element.replace( /^\D+/g, '')
+      CurrentText += " → Partial Out Faro (" + num + ")";
+    }
+    else if (element.includes("farointpar")){
+      var num = element.replace( /^\D+/g, '')
+      CurrentText += " → Partial Int Faro (" + num + ")";
+    }
+    else if (element.includes("faroext")){
+      CurrentText += " → Out Faro ";
+    }
+    else if (element.includes("faroint")){
+      CurrentText += " → Int Faro ";
+    }
+   
+    
+  });
+  
+  return CurrentText;
+}
+
+function addCurrentText(){
+  if (combinationArr.length == 0) divCurr.text(fromcombinationArrToText());
+  combinationArr.forEach(function printl(element){
+    divCurr.text(fromcombinationArrToText())
+  }
+    );
+}
      
+function TextToTextWithArrows(){
+   
+}
 /*
   ORIGIN STACK -----------------------------------------------------------------------------
 
@@ -94,7 +153,7 @@ $('#apply_stack').on('click', function () {
   var stck = $('#stacks').val()
   divOrigen.text(stck).css( 'font-weight', 'bold' );
   divCurr.text("");
-    
+  
     $(".ui-selected").each(function(index,element) {
       element.classList.remove("ui-selected");
     })
@@ -108,11 +167,13 @@ $('#apply_stack').on('click', function () {
     }
     if (stck == "Mnemonica"){
       sortDom(mnemonica);  
+      
     }
 
     if (stck == "New Deck Order 1"){
       sortDom(newdeckorder1);
     }
+    combinationArr=[]
 });
 
 /*
@@ -149,36 +210,43 @@ $('#apply_stack').on('click', function () {
 
 
 //---------------------------- INVERTIR--------------------------
+function inverse(num) {
 
+  
+  var lim = Math.floor(num/2);
+  
 
-  $('#invertir').on('click', function () {
+  $( ".naipe" ).each(function(index,element) {
+    if (index < lim ){
+      index1 = index + 1
+      $( ".tapete div:nth-child(" + num + ")" ).before( $( ".tapete div:nth-child(" + index1 + ")" ) );
+      $( ".tapete div:nth-child(" + index1 + ")" ).before( $( ".tapete div:nth-child(" + num + ")" ) );
+      num--  
+    }
+  })
+   timeoutSelected()
+   disableButtons()
+   checkCurrDeck()
+   
+   
+}
 
+  $('#invertir').on('click',function(){
     var num = $(".ui-selected .naipeImg").length
-    var lim = Math.floor(num/2);
-    divCurr.text(divCurr.text() + " --> Inverse " + num + " cards");
+    inverse(num)
+    combinationArr.push("inverse " + num);
+    addCurrentText()
 
-    $( ".naipe" ).each(function(index,element) {
-      if (index < lim ){
-        index1 = index + 1
-        $( ".tapete div:nth-child(" + num + ")" ).before( $( ".tapete div:nth-child(" + index1 + ")" ) );
-        $( ".tapete div:nth-child(" + index1 + ")" ).before( $( ".tapete div:nth-child(" + num + ")" ) );
-        num--  
-      }
-    })
-     timeoutSelected()
-     disableButtons()
-     checkCurrDeck()
-
-  });
+  } );
 
 
 //---------------------------- CORTAR --------------------------
 
 
-  $('#cut').on('click', function () {
-    var num = $(".ui-selected .naipeImg").length
+ function cut (num) {
+    
 
-    divCurr.text(divCurr.text() + " --> Cut in card " + num);
+    
 
     $( ".naipe" ).each(function(index,element) {
       
@@ -191,16 +259,21 @@ $('#apply_stack').on('click', function () {
      timeoutSelected()
      disableButtons()
      checkCurrDeck()
+     
 
-  });
+  }
+
+  $('#cut').on('click', function(){
+    var num = $(".ui-selected .naipeImg").length
+    cut(num)
+    combinationArr.push("cut " + num);
+    addCurrentText()
+  } );
 
 
 //---------------------------- FARO EXTERIOR --------------------------
 
-
-  $('#faroExt').on('click', function () {
-
-    divCurr.text(divCurr.text() + " --> Faro Exterior");
+  function faroExt(){
     var arr = fromNaipesToArray()
     var half = arr.slice(0,26);
     var otherhalf = arr.slice(26,53);
@@ -209,8 +282,14 @@ $('#apply_stack').on('click', function () {
       arr[2*i] = half[i]
       arr[2*i+1] = otherhalf[i]
     }
-    
+    disableButtons()
     sortDom(arr)
+
+  }
+  $('#faroExt').on('click', function () {
+    faroExt()
+    combinationArr.push("faroext");
+    addCurrentText()
     
   });
 
@@ -218,9 +297,7 @@ $('#apply_stack').on('click', function () {
 
 
 //---------------------------- FARO INTERIOR --------------------------
-
-  $('#faroInt').on('click', function () {
-    divCurr.text(divCurr.text() + " --> Faro Interior");
+function faroInt(){
     var arr = fromNaipesToArray()
     var half = arr.slice(0,26);
     var otherhalf = arr.slice(26,53);
@@ -229,23 +306,21 @@ $('#apply_stack').on('click', function () {
       arr[2*i] = otherhalf[i]
       arr[2*i+1] = half[i]
     }
-    
+    disableButtons()
     sortDom(arr)
+
+}
+  $('#faroInt').on('click', function () {
     
+    faroInt()
+    combinationArr.push("faroint");
+    addCurrentText()
   });
 
 
 
-
 //---------------------------- FARO EXTERIOR PARCIAL --------------------------
-
-
-  $('#faroExtPar').on('click', function () {
-    
-
-    var num = $(".ui-selected .naipeImg").length
-
-    divCurr.text(divCurr.text() + " --> Faro Exterior Parcial (" + num + ")");
+  function faroExtPar(num){
     var arr = fromNaipesToArray()
     var half = arr.slice(0,num);
     var otherhalf = arr.slice(num,53);
@@ -256,23 +331,27 @@ $('#apply_stack').on('click', function () {
     }
 
     timeoutSelected()
-
     disableButtons()
     sortDom(arr)
+
+  }
+
+  $('#faroExtPar').on('click', function () {
     
+
+    var num = $(".ui-selected .naipeImg").length
+    faroExtPar(num)
+    
+    
+    combinationArr.push("faroextpar "  + num);
+    addCurrentText()
   });
 
 
 
 
 //---------------------------- FARO INTERIOR PARCIAL--------------------------
-
-
-  $('#faroIntPar').on('click', function () {
-
-    var num = $(".ui-selected .naipeImg").length
-
-    divCurr.text(divCurr.text() + " --> Faro Interior Parcial (" + num + ")");
+  function faroIntPar(num){
     var arr = fromNaipesToArray()
     var half = arr.slice(0,num);
     var otherhalf = arr.slice(num,53);
@@ -285,16 +364,23 @@ $('#apply_stack').on('click', function () {
     timeoutSelected()
     disableButtons()
     sortDom(arr)
+  }
+
+  $('#faroIntPar').on('click', function () {
+
+    var num = $(".ui-selected .naipeImg").length
+
+    faroIntPar(num)
+    
+    combinationArr.push("farointpar"  + num);
+    addCurrentText()
     
   });
 
 
 
 //---------------------------- ANTIFARO EXT--------------------------
-
-  $('#antifaroExt').on('click', function () {
-
-    divCurr.text(divCurr.text() + " --> Antifaro");
+  function antifaroExt(){
     var newarr = new Array();
     var arr = fromNaipesToArray()
 
@@ -305,16 +391,22 @@ $('#apply_stack').on('click', function () {
     for (var i = 0; i < (arr.length/2); i++) {
       newarr.push(arr[2*i+1])
     }
-  
+    
     sortDom(newarr)
+    disableButtons()
+
+  }
+  $('#antifaroExt').on('click', function () {
+
+    
+    antifaroExt()
+    combinationArr.push("antifaroext" );
+    addCurrentText()
     
   });
 
 //---------------------------- ANTIFARO INT--------------------------
-
-$('#antifaroInt').on('click', function () {
-
-  divCurr.text(divCurr.text() + " --> Antifaro");
+function antifaroInt(){
   var newarr = new Array();
   var arr = fromNaipesToArray()
 
@@ -327,26 +419,116 @@ $('#antifaroInt').on('click', function () {
   }
 
   sortDom(newarr)
+  disableButtons()
+
+}
+$('#antifaroInt').on('click', function () {
+
+  antifaroInt()
+  combinationArr.push("antifaroint" );
+  addCurrentText()
   
 });
+
+
+//---------------------------- ANTIFARO EXT PARCIAL--------------------------
+function antifaroExtPar(num){
+  var newarr = new Array();
+  var arr = fromNaipesToArray()
+
+  for (var i = 0; i < num; i++) {
+    newarr.push(arr[2*i])
+  }
+
+  for (var i = 0; i < num; i++) {
+    newarr.push(arr[2*i+1])
+  }
+
+  for (var i = (2*num);  i < arr.length; i++) {
+    newarr.push(arr[i])
+  }
+  
+  sortDom(newarr)
+  disableButtons()
+
+}
+
+
+//---------------------------- ANTIFARO INT PARCIAL--------------------------
+function antifaroIntPar(num){
+  var newarr = new Array();
+  var arr = fromNaipesToArray()
+
+  for (var i = 0; i < num; i++) {
+    newarr.push(arr[2*i+1])
+  }
+
+  for (var i = 0; i < num; i++) {
+    newarr.push(arr[2*i])
+  }
+
+  for (var i = (2*num);  i < arr.length; i++) {
+    newarr.push(arr[i])
+  }
+
+  sortDom(newarr)
+  disableButtons()
+
+}
+
 
 //---------------------------- CLEAR LAST OPERATION --------------------------
 
 $('#clearLast').on('click', function () {
-
-  divCurr.text(divCurr.text() + " --> Antifaro");
-  var newarr = new Array();
-  var arr = fromNaipesToArray()
-
-  for (var i = 0; i < (arr.length/2); i++) {
-    newarr.push(arr[2*i +1])
+  lastValue = combinationArr[combinationArr.length - 1];
+  if (lastValue.includes("cut")){
+    var num = lastValue.replace( /^\D+/g, '');
+    cut(52-num);
+    
+   //Hacer que el current combination se pinte con combinationArr, hacer funcion 
+   //Borrar el current combination- Pintar current combination otra vez realemente
   }
-
-  for (var i = 0; i < (arr.length/2); i++) {
-    newarr.push(arr[2*i])
+  else if(lastValue.includes("inverse")){
+    var num = lastValue.replace( /^\D+/g, '');
+    inverse(num);
   }
-
-  sortDom(newarr)
+  else if (lastValue.includes("antifaroext")){
+    faroExt(); 
+  }
+  else if (lastValue.includes("antifaroint")){
+    faroInt();
+  }
+  else if (lastValue.includes("faroextpar")){
+    console.log("Num is: "+ num)
+    var num = lastValue.replace( /^\D+/g, '')
+    antifaroExtPar(num)
+  }
+  else if (lastValue.includes("farointpar")){
+    var num = lastValue.replace( /^\D+/g, '')
+    antifaroIntPar(num)
+    
+  }
+  else if (lastValue.includes("faroext")){
+    antifaroExt()
+    
+  }
+  else if (lastValue.includes("faroint")){
+    antifaroInt()
+    
+  }
+  
+  
+  combinationArr.pop();
+  if (combinationArr.length==0){
+    $('#clearLast').prop("disabled",true);
+  }
+  addCurrentText()
+  
+  //Si combinationArr vacio boton desactivado, o si curretn combination ya no tiene nada, desativado
+ //... Así con todas las fucniones
+ //Borramos de Current combination
+ 
+  
   
 });
 
@@ -372,6 +554,34 @@ $( function() {
     selected: function() {
 
    
+
+    }
+
+    
+    
+  });
+  
+} );
+
+$( function() {
+  $( ".selectable" ).selectable({
+    selecting: function() {
+      var num = $(".ui-selecting .naipeImg").length
+      $('#tool').attr('title', "Selected cards: " + num);
+      
+    }
+
+    
+    
+  });
+  
+} );
+
+$( function() {
+  $( ".selectable" ).selectable({
+    unselecting: function() {
+      var num = $(".ui-selecting .naipeImg").length
+      $('#tool').attr('title', "Selected cards: " + num);
 
     }
 
@@ -440,10 +650,11 @@ $( function() {
 
       var firstCard =  $(".naipe ")[0]
       if (!firstCard.classList.contains("ui-selected") &&  $(".naipe ").hasClass("ui-selected")){
-        alert("Please select the first card among the selected ones. If you want to make an operation on some cards which are not in top, first cut the deck");
+        alert("Please select the first card among the selected ones. If you want to make an operation on some cards which are not in top, first cut the deck. To see more information about how to use operations, click on the deckLab logo in the top left corner.");
         $(".ui-selected").each(function(index,element) {
           element.classList.remove("ui-selected");
         })
+        disableButtons()
       }
       
 
@@ -468,8 +679,7 @@ sortDom(['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10',
   $('#faroExt').prop("disabled",false);
   $('#faroInt').prop("disabled",false);
 
-  
-  
+ 
 /*
 FUNCIONES ANTIGUAS
 
@@ -495,7 +705,7 @@ $(function () {
     var num1 = parseInt($('#cambiadas1').val()) + 1;
 
     
-    divCurr.text(divCurr.text() + " --> Put card " + num + " in position " + num1);
+    divCurr.text(divCurr.text() + " → Put card " + num + " in position " + num1);
 
     $( ".tapete div:nth-child(" + num1 + ")" ).before( $( ".tapete div:nth-child(" + num + ")" ) );
     
