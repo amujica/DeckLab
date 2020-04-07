@@ -64,14 +64,13 @@
 
     ¿Herramientas para medir distacncias entre cartas? ¿Que al seleccionar cartas salga en el ratón el numero?
 
-   0.1 Que al lado del ratón salga el número de la carta. Usar tooltip?
+    0.1 Que al lado del ratón salga el número de la carta. Usar tooltip?
     0.2 Poner hover en boton explicando cada funcion. Y poner cuando esté desactivado lo de: please
     select cards first 
     0.3 Poner favicon un par de cartas 
     0.4 Qutar la caja de abajo y que la de current sea una dividida entre dos donde en una puedes
     arrastrar combinaciones?
-
-   1. Clear Last: llamar a la inversa de la última operación: hacer inversa de faros parcial
+    Poder seleccionar la parte de atrás de las cartas
     
    2. Selectable:
         Hacer que siempre tenga que ser desde la primera
@@ -94,7 +93,8 @@
    con operaciones o colocando cartas. 
 
    6. Que cuando coincida con una baraja, o pase algo especial con el stack al que se llega, que salga
-    un mensaje delante de la baraja con efecto. Mejorar la manera en la que sale en "current combination"
+    un mensaje delante de la baraja con efecto. Mejorar la manera en la que sale en "current combination". Estp
+    se hace cambiando checkCurrentDeck
 
    7. Botón de reducir combinación y quitar botones que sobren de la caja de "current combination"
 
@@ -123,15 +123,6 @@
   6. Hacer estilos responsive y hacer que en caso de móvil aparezca el mensaje de "gira el móvil". 
   Subirlo a github.io para poder probar esas cosas y usar la herramienta esa de chrome.
 
-  7. En inspeccionar elemento esconder codigo
-
-  --- Enseñar a magos y decidir si hago lo de mysql y tal---
-
-  7. Migrar a mysql (¿Proyecto nuevo con mismo comando pero sin mongodb?). 
-    7.1 Log in
-    7.2 BBDD con combinaciones
-    7.3 Que se puedan añadir combinaciones 
-    7.4 Hacer profile con una de esas cards con dos pestañas ("My stacks" y "My combinations")
 
 
 
@@ -154,6 +145,7 @@ Para el algoritmo, combinaciones más fáciles que descubrir:
 
 Descubrir combinaciones del estilo: mnemonica a todas negras y rojas, menomica a 4 cartas juntas, a un palo junto y ordenado,
 homologas una al lado de la otra, buscar cosas de poker (mnemonica a dar escalera real y a otro un poker). 
-
+MNemonica a 8king o si stebbins ya que son muchas distintas. 
+Mnemonica a parcial aronson, o viceversa
 Hacerlo con todas las operaciones pero solo probando 3 pasos. INcluida la operación de repartir una mano de poker
 -->

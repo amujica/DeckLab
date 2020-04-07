@@ -23,21 +23,29 @@
       </div>
 
         <!--ORIGIN STACK-->
-        <div class="origin mb-3">
-          <label class="mr-2" for="stacks">Select origin stack </label>
-          <select class = "mr-2" id="stacks" class="mb-2">
-            <option value="Mnemonica">Mnemonica</option>
-            <option value="Aronson">Aronson</option>
-            <option value="New Deck Order">New Deck Order</option>
-            <option value="New Deck Order 1">New Deck Order (1)</option>
-            <option value="Eight Kings">Eight Kings</option>
-            <option value="Randomly Shuffled">Randomly Shuffled</option>
-            <option value="Si Stebbins">Si Stebbins</option>
-          </select>
-          <button  id="apply_stack"> Apply</button>
+      
+        <div class="origin mb-1 ml-5 mr-5" >
+          <div>
+            <label class="mr-2" for="stacks">Select origin stack </label>
+            <select class = "mr-2" id="stacks" class="mb-2">
+              <option value="Mnemonica">Mnemonica</option>
+              <option value="Aronson">Aronson</option>
+              <option value="New Deck Order">New Deck Order</option>
+              <option value="New Deck Order 1">New Deck Order (1)</option>
+              <option value="New Deck Order 2">New Deck Order (2)</option>
+              <option value="Eight Kings">Eight Kings</option>
+              <option value="Randomly Shuffled">Randomly Shuffled</option>
+              <option value="Si Stebbins">Si Stebbins</option>
+            </select>
+            <button  id="apply_stack"> Apply</button>
+          </div>
+
+          <button class="btn btn-link ml-5"  id="downloadStack"
+            title="Download .txt and jpeg files with this stack" 
+            onclick="downloadStack()">Download Stack</button>
   
         </div>
-
+      
       <!--TAPETE ----------------------------------------------------------------->
 
          
@@ -102,8 +110,7 @@
             <div class="naipe" id="50"><img class="naipeImg" src="/img/cards/JS.png" > </div>
             <div class="naipe" id="51"><img class="naipeImg" src="/img/cards/QS.png" > </div>
             <div class="naipe" id="52"><img class="naipeImg" src="/img/cards/KS.png" > </div>
-                 
-         
+    
       </div>
       
       <!--OPERATIONS--------------------->
@@ -118,9 +125,6 @@
 
           <!--CORTAR---->  
           <button class="btn btn-outline-dark ml-1"  id="cut" disabled> Cut</button>
-          
-          <!--CHANGE CARD POSITION-->
-          <button class="btn btn-outline-dark ml-1  " id="change" disabled> Change</button>
 
           <!--FARO SHUFFLE EXT-->
           <button class="btn btn-outline-dark  ml-1 " id="faroExt"> Out Faro</button>
@@ -139,7 +143,9 @@
 
           <!--ANTIFARO INT-->
           <button class="btn btn-outline-dark  ml-1" id="antifaroInt" > Int Antifaro</button>
-
+          
+           <!--CHANGE CARD POSITION-->
+           <button class="btn btn-outline-dark ml-1  " id="change" disabled> Cull</button>
           <!--CLEAR-->
           <button class="btn btn-outline-dark  ml-1" id="clearLast" disabled> Clear last operation</button>
         
@@ -155,23 +161,20 @@
         <h5 class="card-header">Current combination</h5>
         <div class=" d-flex flex-row border-top border-secondary">
           <div class="card-body" >
-            <p id="stackOrigen"> 
-              <strong>New Deck Order</strong>
-
-            </p>
-            <p class="card-text" id="currentComb"> 
-
-            </p>
-            <p id="stackDestino"> 
+            <span id="stackOrigen"> <strong>New Deck Order</strong> </span>
+            <span class="card-text" id="currentComb"> 
+              
+            </span>
+            <span id="stackDestino"> 
               <strong> </strong>
 
-            </p>
+            </span>
           </div>
             
           <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
-              <button class="btn-info mb-1 ml-1 mr-1 mt-1 " data-toggle="tooltip" data-html="true" title="Add combination and it will appear in your saved combinations">Add new combination</button>
-              <button class="btn-info mb-1 ml-1 mr-1 mt-1" data-toggle="tooltip" data-html="true" title="Add combination and stack appearing in the screen and they will appear in your saved combinations and stacks">Add stack and combination</button>
-              <button class="btn-info mb-1 ml-1 mr-1 mt-1 " data-toggle="tooltip" data-html="true" title="Clear current combination on screen" style="align-self: center;" id = "clear">Clear</button>
+              
+              <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="downloadComb" disabled title="Download file with this combination" onclick="download()"  >Download Combination</button>
+              
           </div>
         </div>
       </div>
@@ -180,13 +183,23 @@
       <!--YOUR COMBINATIONS------------------------------------------------------------------->
 
         <div class="card ml-2 mt-1 mb-2 border border-secondary">
-          <h5 class="card-header">Your combinations - Here we will have a Carousel</h5> 
+          <h5 class="card-header"> Imported combination </h5>
+          <div class=" d-flex flex-row border-top border-secondary">
           <div class="card-body border-top border-secondary">
-            <p class="card-text"> <strong> New Deck Order 1</strong> &#8594; Inverse 26 cards &#8594; Faro Exterior &#8594; Faro Exterior &#8594;
-               Faro Exterior &#8594; Faro Exterior &#8594; Inverse 26 cards  &#8594;
-               Faro Exterior Parcial (18) &#8594; Cut in card 9 &#8594; <strong>Mnemonica </strong></p>
+            <p class="card-text"> <strong></strong> 
+             <span style="color:grey">Drag here a .txt file to import a combination or click </span> 
+             <button class="btn btn-secondary"  id="uploadComb" disabled  >Upload file</button>
+             <strong></strong></p>
             
           </div>
+          <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;"
+           >
+              
+            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="performComb" disabled title="Automatically performs combination" onclick="download()"  >Perform Combination</button>
+            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="clearImpComb" disabled title="Clear combination" onclick="clear()"  >Clear</button>
+            
+        </div>
+      </div> 
         </div>
         
 </body>
@@ -205,7 +218,7 @@ src="https://unpkg.com/@popperjs/core@2">
 </script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
 
 <!--JAVASCRIPT-------------------------->
 <script src="functions.js">

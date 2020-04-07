@@ -1,4 +1,3 @@
-
 var divCurr = $('#currentComb');
 var divOrigen = $('#stackOrigen');
 var divDestino = $('#stackDestino');
@@ -18,12 +17,16 @@ var mnemonica = ['#17', '#02', '#33', '#16', '#04', '#32', '#40', '#05', '#48', 
 
 var newdeckorder1 = ['#13', '#12', '#11', '#10', '#09', '#08', '#07', '#06', '#05', '#04', 
 '#03', '#02', '#01', '#52', '#51', '#50', '#49', '#48', '#47', '#46', '#45', '#44', '#43', '#42', '#41', '#40',
-'#27', '#28', '#29', '#30', '#31', '#32', '#33', '#34', '#35', '#36', '#37', '#38', '#39', 
+'#39', '#38', '#37', '#36', '#35', '#34', '#33', '#32', '#31', '#30', '#29', '#28', '#27', 
 '#26', '#25', '#24', '#23', '#22', '#21', '#20',
 '#19', '#18', '#17', '#16', '#15', '#14', 
 
 ]
 
+var newdeckorder2= ['#01','#02','#03','#04','#05','#06','#07','#08','#09','#10','#11','#12'
+,'#13','#40','#41','#42','#43','#44','#45','#46','#47','#48','#49','#50','#51','#52',
+'#39','#38','#37','#36','#35','#34','#33','#32','#31','#30','#29','#28','#27','#26','#25',
+'#24','#23','#22','#21','#20','#19','#18','#17','#16','#15','#14']
 /*
   FUNCIONES PRIVADAS -------------------------------------------------------------------------------
 
@@ -75,6 +78,8 @@ function disableButtons (){
      $('#antifaroInt').prop("disabled",false);
      $('#antifaroExt').prop("disabled",false);
      $('#clearLast').prop("disabled",false);
+     $('#downloadComb').prop("disabled",false);
+
      
 
 }
@@ -141,9 +146,7 @@ function addCurrentText(){
     );
 }
      
-function TextToTextWithArrows(){
-   
-}
+
 /*
   ORIGIN STACK -----------------------------------------------------------------------------
 
@@ -172,6 +175,9 @@ $('#apply_stack').on('click', function () {
 
     if (stck == "New Deck Order 1"){
       sortDom(newdeckorder1);
+    }
+    if (stck == "New Deck Order 2"){
+      sortDom(newdeckorder2);
     }
     combinationArr=[]
 });
@@ -236,6 +242,7 @@ function inverse(num) {
     inverse(num)
     combinationArr.push("inverse " + num);
     addCurrentText()
+    $('#tool').attr('title', "Selected cards: 0");
 
   } );
 
@@ -268,6 +275,7 @@ function inverse(num) {
     cut(num)
     combinationArr.push("cut " + num);
     addCurrentText()
+    $('#tool').attr('title', "Selected cards: 0");
   } );
 
 
@@ -290,6 +298,7 @@ function inverse(num) {
     faroExt()
     combinationArr.push("faroext");
     addCurrentText()
+    $('#tool').attr('title', "Selected cards: 0");
     
   });
 
@@ -315,6 +324,7 @@ function faroInt(){
     faroInt()
     combinationArr.push("faroint");
     addCurrentText()
+    $('#tool').attr('title', "Selected cards: 0");
   });
 
 
@@ -345,6 +355,7 @@ function faroInt(){
     
     combinationArr.push("faroextpar "  + num);
     addCurrentText()
+    $('#tool').attr('title', "Selected cards: 0");
   });
 
 
@@ -374,6 +385,7 @@ function faroInt(){
     
     combinationArr.push("farointpar"  + num);
     addCurrentText()
+    $('#tool').attr('title', "Selected cards: 0");
     
   });
 
@@ -402,6 +414,7 @@ function faroInt(){
     antifaroExt()
     combinationArr.push("antifaroext" );
     addCurrentText()
+    $('#tool').attr('title', "Selected cards: 0");
     
   });
 
@@ -427,6 +440,7 @@ $('#antifaroInt').on('click', function () {
   antifaroInt()
   combinationArr.push("antifaroint" );
   addCurrentText()
+  $('#tool').attr('title', "Selected cards: 0");
   
 });
 
@@ -450,6 +464,7 @@ function antifaroExtPar(num){
   
   sortDom(newarr)
   disableButtons()
+  $('#tool').attr('title', "Selected cards: 0");
 
 }
 
@@ -473,6 +488,7 @@ function antifaroIntPar(num){
 
   sortDom(newarr)
   disableButtons()
+  $('#tool').attr('title', "Selected cards: 0");
 
 }
 
@@ -521,12 +537,14 @@ $('#clearLast').on('click', function () {
   combinationArr.pop();
   if (combinationArr.length==0){
     $('#clearLast').prop("disabled",true);
+    $('#downloadComb').prop("disabled",true);
   }
   addCurrentText()
   
   //Si combinationArr vacio boton desactivado, o si curretn combination ya no tiene nada, desativado
  //... Así con todas las fucniones
  //Borramos de Current combination
+ //Que cuando se haga clear se borre también stackdestino, y que se ponga flechita!
  
   
   
@@ -536,12 +554,32 @@ $('#clearLast').on('click', function () {
   BOTONES CURRENT COMBINATION ------------------------------------------------------------
 
 */
-$(function () {
-   $('#clear').on('click', function () {
-     divCurr.text("");
-   });
- });
- 
+function download() {
+  var save = $('#stackOrigen').text() + fromcombinationArrToText() + " → "+ $('#stackDestino').text();
+  var blob = new Blob([save], {
+    type: "text/plain;charset=utf-8"
+  });
+  saveAs(blob, "combination.txt");
+
+  //Que pregunte con qué nombre guardarlo
+  //Que lo guarde más bonito, en un pdf quizás con la baraja de origen y final. 
+  //O textgo enriquecido
+}
+
+function downloadStack() {
+  var save = fromNaipesToArray();
+  var blob = new Blob([save], {
+    type: "text/plain;charset=utf-8"
+  });
+  saveAs(blob, "stack.txt");
+
+  
+
+  //Que pregunte con qué nombre guardarlo
+  //Que lo guarde más bonito, en un pdf quizás con la baraja de origen y final. 
+  //O textgo enriquecido
+}
+
 
 /*
   SELECTABLE ------------------------------------------------------------
@@ -678,6 +716,8 @@ sortDom(['#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08', '#09', '#10',
   $('#faroIntPar').prop("disabled",true);
   $('#faroExt').prop("disabled",false);
   $('#faroInt').prop("disabled",false);
+  $('#downloadComb').prop("disabled",true);
+  //$('#downloadStack').prop("disabled",false);
 
  
 /*
@@ -713,3 +753,4 @@ $(function () {
 });
 
 */
+
