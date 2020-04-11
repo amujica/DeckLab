@@ -477,15 +477,12 @@ function antifaroIntPar(num){
   for (var i = 0; i < num; i++) {
     newarr.push(arr[2*i+1])
   }
-
   for (var i = 0; i < num; i++) {
     newarr.push(arr[2*i])
   }
-
   for (var i = (2*num);  i < arr.length; i++) {
     newarr.push(arr[i])
   }
-
   sortDom(newarr)
   disableButtons()
   $('#tool').attr('title', "Selected cards: 0");
@@ -500,7 +497,6 @@ $('#clearLast').on('click', function () {
   if (lastValue.includes("cut")){
     var num = lastValue.replace( /^\D+/g, '');
     cut(52-num);
-    
    //Hacer que el current combination se pinte con combinationArr, hacer funcion 
    //Borrar el current combination- Pintar current combination otra vez realemente
   }
@@ -515,22 +511,18 @@ $('#clearLast').on('click', function () {
     faroInt();
   }
   else if (lastValue.includes("faroextpar")){
-    console.log("Num is: "+ num)
     var num = lastValue.replace( /^\D+/g, '')
     antifaroExtPar(num)
   }
   else if (lastValue.includes("farointpar")){
     var num = lastValue.replace( /^\D+/g, '')
     antifaroIntPar(num)
-    
   }
   else if (lastValue.includes("faroext")){
     antifaroExt()
-    
   }
   else if (lastValue.includes("faroint")){
     antifaroInt()
-    
   }
   
   
@@ -555,7 +547,8 @@ $('#clearLast').on('click', function () {
 
 */
 function download() {
-  var save = $('#stackOrigen').text() + fromcombinationArrToText() + " → "+ $('#stackDestino').text();
+  var save = $('#stackOrigen').text() + fromcombinationArrToText() + " → "+ $('#stackDestino').text()
+  //+ "\n\n This text file can be imported at the bottom of the Laboratory tab in order to perform it automatically. You can also use it to remember this combination!";
   var blob = new Blob([save], {
     type: "text/plain;charset=utf-8"
   });
@@ -567,11 +560,18 @@ function download() {
 }
 
 function downloadStack() {
-  var save = fromNaipesToArray();
+  var save = fromNaipesToArray() + "\n \nThis text file can be imported at the green box that have the cards in the Laboratory tab in order to be able to use this stack whenever you want. You can save it in your computer and import it everytime you need to use this stack!";;
   var blob = new Blob([save], {
     type: "text/plain;charset=utf-8"
   });
   saveAs(blob, "stack.txt");
+
+  var node = document.getElementById('tool');
+  domtoimage.toBlob(document.getElementById('tool'))
+        .then(function(blob1) {
+          window.saveAs(blob1, 'stack.png');
+        });
+    
 
   
 
@@ -590,29 +590,17 @@ function downloadStack() {
 $( function() {
   $( ".selectable" ).selectable({
     selected: function() {
-
-   
-
     }
-
-    
-    
   });
-  
 } );
 
 $( function() {
   $( ".selectable" ).selectable({
     selecting: function() {
       var num = $(".ui-selecting .naipeImg").length
-      $('#tool').attr('title', "Selected cards: " + num);
-      
+      $('#tool').attr('title', "Selected cards: " + num); 
     }
-
-    
-    
   });
-  
 } );
 
 $( function() {
@@ -620,29 +608,19 @@ $( function() {
     unselecting: function() {
       var num = $(".ui-selecting .naipeImg").length
       $('#tool').attr('title', "Selected cards: " + num);
-
-    }
-
-    
-    
+    }    
   });
-  
 } );
 
 $( function() {
   $( ".selectable" ).selectable({
     unselected: function() {
-      
-      var num = $(".ui-selected .naipeImg").length
-
+      var num = $(".ui-selected .naipeImg").lengt
       if (num==0){
         disableButtons()
       }
-
     }
-
   });
-  
 } );
 
 $( function() {
@@ -684,8 +662,6 @@ $( function() {
         disableButtons()
       }
 
-
-
       var firstCard =  $(".naipe ")[0]
       if (!firstCard.classList.contains("ui-selected") &&  $(".naipe ").hasClass("ui-selected")){
         alert("Please select the first card among the selected ones. If you want to make an operation on some cards which are not in top, first cut the deck. To see more information about how to use operations, click on the deckLab logo in the top left corner.");
@@ -694,12 +670,8 @@ $( function() {
         })
         disableButtons()
       }
-      
-
     }
-
   });
-  
 } );
 
 
@@ -754,3 +726,143 @@ $(function () {
 
 */
 
+$(window).load(function() {
+  // Animate loader off screen
+  $(".se-pre-con").fadeOut("slow");;
+});
+
+
+document.getElementById('input-file')
+  .addEventListener('change', getFile)
+
+function getFile(event) {
+  $('#clearImpComb').prop("disabled",false);
+  $('#performComb').prop("disabled",false);
+  $('#uploadComb').hide()
+  const input = event.target
+  if ('files' in input && input.files.length > 0 ) {
+	  placeFileContent(
+      document.getElementById('content-target'),
+      input.files[0])
+
+  }else{
+    alert("Only .txt files are accepted")
+  }
+}
+
+function placeFileContent(target, file) {
+	readFileContent(file).then(content => {
+    origin = content.substring(0, content.indexOf('→')); 
+    rest = content.substring(content.indexOf('→'), content.length)
+    
+    
+    /*
+    Content es un string con la info, aquí hay que hacer una serie
+    de comprobaciones para que se vea que lo que se arrastra es una combinación
+    y no otras cosas. Hacerlo por tamaño, si tiene más de x caracteres no deja
+
+    Además habrá que cortar el string ese que no es parte de la combinación
+
+    Comprobación de que es un .txt donde va? No admitir otros formatos
+
+
+    */
+  	target.innerHTML = '<strong>'+ origin +'</strong>'+rest
+  }).catch(error => console.log(error))
+}
+
+function readFileContent(file) {
+  const reader = new FileReader()
+  return new Promise((resolve, reject) => {
+    reader.onload = event => resolve(event.target.result)
+    reader.onerror = error => reject(error)
+    reader.readAsText(file)
+
+    
+  })
+}
+
+function clearImp(){
+  $('#uploadComb').show()
+  document.getElementById('content-target').innerHTML = "";
+  $('#clearImpComb').prop("disabled",true);
+  $('#performComb').prop("disabled",true);
+  $('#dropzone').className = "dropzone dragover";
+  
+}
+
+
+(function() {
+  var dropzone = document.getElementById("dropzone");
+
+    dropzone.ondrop = function(event) {
+      event.preventDefault();
+      this.className = "dropzone dragover";
+
+      $('#clearImpComb').prop("disabled",false);
+      $('#performComb').prop("disabled",false);
+      $('#uploadComb').hide()
+      placeFileContent(
+        document.getElementById('content-target'),
+        event.dataTransfer.files[0])
+        
+
+  
+      /*var fileInput = document.getElementById('dropzone');
+      var fileDisplayArea = document.getElementById('content-target');
+
+        var file = event.dataTransfer.files[0]
+        var textType = /text.*/;
+
+      /*    if (file.type.match(textType)) {
+          var reader = new FileReader();
+
+          reader.onload = function(read) {
+            fileDisplayArea.innerText = reader.result;
+          }
+
+          reader.readAsText(file);
+          }
+
+          else {
+            fileDisplayArea.innerText = "File not supported!";
+          }*/
+}
+
+  dropzone.ondragover = function() {
+    this.className = "dropzone";
+    return false;
+  };
+
+  dropzone.ondragleave = function() {
+    this.className = "dropzone dragover ";
+    return false;
+  };
+
+}())
+
+function performCombination(){
+  const input = event.target
+  readFileContent(input.files[0]).then(content => {
+  
+    origin = content.substring(0, content.indexOf('→')); 
+    rest = content.substring(content.indexOf('→'), content.length)
+    console.log(origin)
+    console.log(rest)
+    
+    
+    /*
+    Content es un string con la info, aquí hay que hacer una serie
+    de comprobaciones para que se vea que lo que se arrastra es una combinación
+    y no otras cosas. Hacerlo por tamaño, si tiene más de x caracteres no deja
+
+    Además habrá que cortar el string ese que no es parte de la combinación
+
+    Comprobación de que es un .txt donde va? No admitir otros formatos
+
+
+    */
+  	target.innerHTML = '<strong>'+ origin +'</strong>'+rest
+  }).catch(error => console.log(error))
+}
+  

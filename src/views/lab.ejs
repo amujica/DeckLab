@@ -9,8 +9,8 @@
    
 </head>
 <body>
-  
-   
+  <div id="MainWrapper">
+  <div class="se-pre-con"></div>
   
 
     <%- include("partials/head")%>
@@ -23,8 +23,13 @@
       </div>
 
         <!--ORIGIN STACK-->
+
+        
       
         <div class="origin mb-1 ml-5 mr-5" >
+          
+          <div  style="color:grey" id="uploadOrDrag"></p>Drag a .txt file inside the green box </div> 
+
           <div>
             <label class="mr-2" for="stacks">Select origin stack </label>
             <select class = "mr-2" id="stacks" class="mb-2">
@@ -39,12 +44,14 @@
             </select>
             <button  id="apply_stack"> Apply</button>
           </div>
-
+          
           <button class="btn btn-link ml-5"  id="downloadStack"
             title="Download .txt and jpeg files with this stack" 
             onclick="downloadStack()">Download Stack</button>
   
         </div>
+
+        
       
       <!--TAPETE ----------------------------------------------------------------->
 
@@ -113,6 +120,7 @@
     
       </div>
       
+
       <!--OPERATIONS--------------------->
       <div  class="operations p-3 mb-2">
 
@@ -143,7 +151,7 @@
 
           <!--ANTIFARO INT-->
           <button class="btn btn-outline-dark  ml-1" id="antifaroInt" > Int Antifaro</button>
-          
+
            <!--CHANGE CARD POSITION-->
            <button class="btn btn-outline-dark ml-1  " id="change" disabled> Cull</button>
           <!--CLEAR-->
@@ -186,22 +194,37 @@
           <h5 class="card-header"> Imported combination </h5>
           <div class=" d-flex flex-row border-top border-secondary">
           <div class="card-body border-top border-secondary">
-            <p class="card-text"> <strong></strong> 
-             <span style="color:grey">Drag here a .txt file to import a combination or click </span> 
-             <button class="btn btn-secondary"  id="uploadComb" disabled  >Upload file</button>
-             <strong></strong></p>
+            <div class="card-text" class="dropzone" id="dropzone" > 
+              <div id="content-target" class="displayarea" > 
+                
+                
+              </div>
+        
+              <div class="custom-file" id="uploadComb">
+                <label class="custom-file-label" for="input-file" >Drag here a .txt file to import a combination or click browse</label><br>
+                <input class="custom-file-input" type="file" id="input-file">
+               </div>
+
+              </div>
             
           </div>
-          <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;"
-           >
+          <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
               
-            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="performComb" disabled title="Automatically performs combination" onclick="download()"  >Perform Combination</button>
-            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="clearImpComb" disabled title="Clear combination" onclick="clear()"  >Clear</button>
+            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="performComb" disabled title="Automatically performs combination" onclick="performCombination()"  >Perform Combination</button>
+            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="clearImpComb" disabled title="Clear combination" onclick="clearImp()"  >Clear</button>
             
         </div>
       </div> 
         </div>
+
+    
+      <!--<main>
+        <h2>Changesets</h2>
+        <div class="dropzone" id="dropzone">Drop .json files here to convert</div>
+        <div class="displayarea" id="displayarea"></div>
         
+      </main>--> 
+    </div>  
 </body>
 
 <!--FUNCIONES--------------------------------------------------------------------------------->
@@ -210,16 +233,14 @@
 <script
 src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-crossorigin="anonymous">
-</script>
-<script
-src="https://unpkg.com/@popperjs/core@2">
-
-</script>
+crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 <!--JAVASCRIPT-------------------------->
 <script src="functions.js">
 

@@ -42,7 +42,12 @@
   right: 0;
 
 }
+#uploadOrDrag{
+  position: absolute;
+  top: 0;
+  left: 0;
 
+}
 
 .origin{
   position: relative;
@@ -82,9 +87,43 @@ https://uniwebsidad.com/foro/pregunta/339/como-hacer-que-una-web-se-abra-en-hori
 .naipeImg{
   width: 132.94px;
   height: 184.7px;
-  -webkit-print-color-adjust: exact;
-  
-  
 
 }
 
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('/vid/loading.gif') center no-repeat #fff;
+}
+
+
+label {
+  cursor: pointer;
+}
+
+.dropzone {
+  display: flex;
+  line-height: 30px;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  color: #ccc;
+}
+
+.dropzone.dragover {
+  color: black;
+  border: none;
+}
+
+#MainWrapper {
+  width: 100vmax;
+  }
+
+.displayarea{
+  align-items: left;
+}

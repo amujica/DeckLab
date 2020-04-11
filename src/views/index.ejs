@@ -62,87 +62,70 @@
 
 <!--
 
-    ¿Herramientas para medir distacncias entre cartas? ¿Que al seleccionar cartas salga en el ratón el numero?
+    0. Que a la dropzone de combination solo se pueda arrastrar .txt y poner límites de tamaño
+    1. Que al arrastrar combinación ponga el titulo al lado de "Imported combination"
+    2. Implementar perform combination (se desactivan todos los botones cuando está funcionando)
+    3. Hacer dropzone con cartas y que se añada opcion al desplegable
+    4. Que al hacer click en download stack se descargue la imagen del div
+    5. Añadir favicon: un par de cartas
+    6. Que al llegar a un stack salga sobre el tapete un mensaje. En checkCurrent()
+    7. Implementar cull con jquery sorteable. "Now cull the cards you want" encima del tapete
+    de manera intermitente
+    8. Boton de reducir combinación. Preguntar al usuario si quiere que se reduzca su combinación antes de 
+   que la descargue. Si ya la ha reducido no preguntar
+    9. Hacer que los botones de current combination y imported no cambien de tamaño
+    8. Pasarlo a un nuevo proyecto limpio y con las dependencias necesarias
+    9. Arreglar que aparezca la pagina sin estilos antes que la pagina
+    10. Hacer que la pagina principal tenga intrucciones y mandar a magos para que lo prueben
 
-    0.1 Que al lado del ratón salga el número de la carta. Usar tooltip?
-    0.2 Poner hover en boton explicando cada funcion. Y poner cuando esté desactivado lo de: please
-    select cards first 
-    0.3 Poner favicon un par de cartas 
-    0.4 Qutar la caja de abajo y que la de current sea una dividida entre dos donde en una puedes
-    arrastrar combinaciones?
-    Poder seleccionar la parte de atrás de las cartas
+    ---------Mejoras------------
+    -Que al lado del ratón salga el número de la carta. Usar tooltip?
+    -Poner hover en boton explicando cada funcion. Y poner cuando esté desactivado lo de: please
+    select cards first. Instrucciones en los botones disabled para guiar al usuario y sepa por qué están desactivados 
+    -Opción de meter jokers y de marcar cartas para seguirlas y darlas la vuelta (que se den
+    la vuelta y se vea el dorso pero que ponga qué carta es). En caso de meter jokers poner los metodos
+    para que funcionen con 54 cartas tambien. Que en los jokers salga joker en vertical
+    -https://deck.of.cards/ coger el dorso y probar con esas cartas igual más bonito
+    -PROBAR cartas con svg quizas? https://github.com/crobertsbmw/deckofcards/tree/master/static/img
+
+    -------Futuro------------   
     
-   2. Selectable:
-        Hacer que siempre tenga que ser desde la primera
-        Que se seleccione bonito
-        Que se pueda deseleccionar al clickar fuera
-        Que se pueda arrastrar el raton desde fuera
-
-   3. Sorteable Jquery para cambiar de carta. "Now drag
-    a card into its new position" Que lo ponga en algún sitio cuando das al botó de activar. Hover? O que
-    salga encima de la baraja de manera intermitente en el mismo elemento donde sale el nombre de la 
-    baraja si llegaras o cuando se pone en origin stack. Que puedas arrastrar varias seguidas? Y cuando des al 
-    botón ya está?
-
-   4. Inverso de todas las funciones
-
-    5. Jquery para que al clickar las cartas se extiendan. Que ponga "Haz click para extender cartas". 
-  Animaciones de las cartas al moverse
-
-   5. Descargar combinaciones y stacks y poder subirlos. Que para añadir a una baraja puedas llegar a ella 
-   con operaciones o colocando cartas. 
-
-   6. Que cuando coincida con una baraja, o pase algo especial con el stack al que se llega, que salga
-    un mensaje delante de la baraja con efecto. Mejorar la manera en la que sale en "current combination". Estp
-    se hace cambiando checkCurrentDeck
-
-   7. Botón de reducir combinación y quitar botones que sobren de la caja de "current combination"
-
-   8. Mezcla mano, mezcla americana (pensar en qué lab va a estar)
-
-    9. Opción de meter jokers y de marcar cartas para seguirlas y darlas la vuelta (que se den
-    la vuelta y se vea el dorso pero que ponga qué carta es)
-
-    10. Barajas incompletas (Pensar en qué labs tienen sentido estas barajas)
-
-    11. Animaciones para cuando se muevan las cartas? 
-
-    12. Instrucciones en los botones disabled para guiar al usuario y sepa por qué están desactivados
-
-    13. Asegurar que mientras se opera en el lab se puede ver current combination y my combinations!
+    Buscar todas las combinaciones que se sepan. Que en cada lab haya un link que te lleva a la parte de la pestaña que tiene la info que se sabe de lo descubierto en ese lab.
+    Barajas incompletas (Pensar en qué labs tienen sentido estas barajas)
 
     Para cuando el usuario pinche fuera sin querer:
-        https://www.geeksforgeeks.org/how-to-hide-a-div-when-the-user-clicks-outside-of-it-using-jquery/
+    https://www.geeksforgeeks.org/how-to-hide-a-div-when-the-user-clicks-outside-of-it-using-jquery/
 
 
     14. Esconder codigo cliente 
     https://code-boxx.com/hide-javascript-code-from-client/
 
- 
-
-  6. Hacer estilos responsive y hacer que en caso de móvil aparezca el mensaje de "gira el móvil". 
-  Subirlo a github.io para poder probar esas cosas y usar la herramienta esa de chrome.
 
 
-
-
-
-
-Que el lab cambie para hacer distintos estudios: (nuevos botones o ver qué cambios hay que hacer)
-Que haya una parte común a todos (descargar baraja, el tapete igual...)
+    Que el lab cambie para hacer distintos estudios: (nuevos botones o ver qué cambios hay que hacer)
+    Que haya una parte común a todos (descargar baraja, el tapete igual...)
 
     - Set up your deck
     - General lab (para experimentar donde quedan cartas?)
     - Poker/ card game (que se puedan hacer deals y al recoger ver qué se puede hacer con esa baraja)
         Meter aquí la caja del poker, del black jack...etc
     - Principio Gilbreath
-    - 
+    - Ben Joffe Deck: pones una baraja y te dice si se cuplme joffe para 2,3 ,4 5 jugadores y para
+    delaer, small blind... ¿Quizás hacer un lab para descubrir ropiedades de las barajas? Hacer enumeracion
+    de propiedades que puede tener una baraja y quizás puede haber un lab que de herramientas para 
+    saber si se cumplen o no.
+    - Lab para seguir cartas en una baraja. Te dice con que probabilidad acabará en una posición o detrás de
+    otra... etc. Shuffle lab con mezcla americana y arrastre, que puedas controlar mezclas, marcar cartas y calcular posibilidades
     - Preguntar por más opciones!
 
 
 
 Para el algoritmo, combinaciones más fáciles que descubrir:
+Probar algoritmo de ben joffe a ver si se  descubre rápido.
 
+Recopilar propiedades de una baraja ordenada deseables, y hacer una baraja que las tenga todas. 
+
+https://www.benjoffe.com/holdem
 Descubrir combinaciones del estilo: mnemonica a todas negras y rojas, menomica a 4 cartas juntas, a un palo junto y ordenado,
 homologas una al lado de la otra, buscar cosas de poker (mnemonica a dar escalera real y a otro un poker). 
 MNemonica a 8king o si stebbins ya que son muchas distintas. 
