@@ -1,8 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
-const multer = require('multer');
 var favicon = require('serve-favicon');
-const { format } = require('timeago.js');
+
 
 const path = require('path');
 
@@ -22,10 +21,10 @@ app.use(express.urlencoded({extended: false}));
 //app.use('/favicon.ico', express.static('img/favicon.ico'));
 //app.use(favicon(path.join(__dirname, 'public', 'img', 'favicon.ico')));
 // Global variables
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     app.locals.format = format;
     next();
-});
+});*/
 
 // routes
 app.use(require('./routes/index'));

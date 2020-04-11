@@ -1,243 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DeckLab</title>
-    
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DeckLab</title>
+
+
+  <%- include("partials/head")%>
+
 </head>
+<%- include("partials/navigation") %>
+
 <body>
   <div id="MainWrapper">
-  <div class="se-pre-con"></div>
-  
+    <div class="se-pre-con"></div>
 
-    <%- include("partials/head")%>
-    <%- include("partials/navigation") %>
-    
+
+
     <!--TÍTULO-------------------------------------------------------------------->
 
-      <div class="p-3 mb-0 ml-5 mr-5 mt-0">
-        <h3>  Laboratory</h3>
+    <div class="p-3 mb-0 ml-5 mr-5 mt-0">
+      <h3> Laboratory</h3>
+    </div>
+
+    <!--ORIGIN STACK-->
+
+
+
+    <div class="origin mb-1 ml-5 mr-5">
+
+      <div style="color:grey" id="uploadOrDrag">
+        </p>Drag a .txt file inside the green box </div>
+
+      <div>
+        <label class="mr-2" for="stacks">Select origin stack </label>
+        <select class="mr-2" id="stacks" class="mb-2">
+          <option value="Mnemonica">Mnemonica</option>
+          <option value="Aronson">Aronson</option>
+          <option value="New Deck Order">New Deck Order</option>
+          <option value="New Deck Order 1">New Deck Order (1)</option>
+          <option value="New Deck Order 2">New Deck Order (2)</option>
+          <option value="Eight Kings">Eight Kings</option>
+          <option value="Randomly Shuffled">Randomly Shuffled</option>
+          <option value="Si Stebbins">Si Stebbins</option>
+        </select>
+        <button id="apply_stack"> Apply</button>
       </div>
 
-        <!--ORIGIN STACK-->
+      <button class="btn btn-link ml-5" id="downloadStack" title="Download .txt and jpeg files with this stack"
+        onclick="downloadStack()">Download Stack</button>
 
-        
-      
-        <div class="origin mb-1 ml-5 mr-5" >
-          
-          <div  style="color:grey" id="uploadOrDrag"></p>Drag a .txt file inside the green box </div> 
+    </div>
 
-          <div>
-            <label class="mr-2" for="stacks">Select origin stack </label>
-            <select class = "mr-2" id="stacks" class="mb-2">
-              <option value="Mnemonica">Mnemonica</option>
-              <option value="Aronson">Aronson</option>
-              <option value="New Deck Order">New Deck Order</option>
-              <option value="New Deck Order 1">New Deck Order (1)</option>
-              <option value="New Deck Order 2">New Deck Order (2)</option>
-              <option value="Eight Kings">Eight Kings</option>
-              <option value="Randomly Shuffled">Randomly Shuffled</option>
-              <option value="Si Stebbins">Si Stebbins</option>
-            </select>
-            <button  id="apply_stack"> Apply</button>
-          </div>
-          
-          <button class="btn btn-link ml-5"  id="downloadStack"
-            title="Download .txt and jpeg files with this stack" 
-            onclick="downloadStack()">Download Stack</button>
-  
+
+
+    <!--TAPETE ----------------------------------------------------------------->
+
+
+
+    <div class="selectable tapete p-3 mb-2 ml-5 mr-5 mt-2 text-white shadow-lg" title="Selected cards: 0" id="tool">
+
+      <!--CARTAS--------------------->
+
+      <div class="naipe" id="01"><img class="naipeImg" src="/img/cards/AH.png"> </div>
+      <div class="naipe" id="02"><img class="naipeImg" src="/img/cards/2H.png"> </div>
+      <div class="naipe" id="03"><img class="naipeImg" src="/img/cards/3H.png"> </div>
+      <div class="naipe" id="04"><img class="naipeImg" src="/img/cards/4H.png"> </div>
+      <div class="naipe" id="05"><img class="naipeImg" src="/img/cards/5H.png"> </div>
+      <div class="naipe" id="06"><img class="naipeImg" src="/img/cards/6H.png"> </div>
+      <div class="naipe" id="07"><img class="naipeImg" src="/img/cards/7H.png"> </div>
+      <div class="naipe" id="08"><img class="naipeImg" src="/img/cards/8H.png"> </div>
+      <div class="naipe" id="09"><img class="naipeImg" src="/img/cards/9H.png"> </div>
+      <div class="naipe" id="10"><img class="naipeImg" src="/img/cards/0H.png"> </div>
+      <div class="naipe" id="11"><img class="naipeImg" src="/img/cards/JH.png"> </div>
+      <div class="naipe" id="12"><img class="naipeImg" src="/img/cards/QH.png"> </div>
+      <div class="naipe" id="13"><img class="naipeImg" src="/img/cards/KH.png"> </div>
+
+      <div class="naipe" id="14"><img class="naipeImg" src="/img/cards/AC.png"> </div>
+      <div class="naipe" id="15"><img class="naipeImg" src="/img/cards/2C.png"> </div>
+      <div class="naipe" id="16"><img class="naipeImg" src="/img/cards/3C.png"> </div>
+      <div class="naipe" id="17"><img class="naipeImg" src="/img/cards/4C.png"> </div>
+      <div class="naipe" id="18"><img class="naipeImg" src="/img/cards/5C.png"> </div>
+      <div class="naipe" id="19"><img class="naipeImg" src="/img/cards/6C.png"> </div>
+      <div class="naipe" id="20"><img class="naipeImg" src="/img/cards/7C.png"> </div>
+      <div class="naipe" id="21"><img class="naipeImg" src="/img/cards/8C.png"> </div>
+      <div class="naipe" id="22"><img class="naipeImg" src="/img/cards/9C.png"> </div>
+      <div class="naipe" id="23"><img class="naipeImg" src="/img/cards/0C.png"> </div>
+      <div class="naipe" id="24"><img class="naipeImg" src="/img/cards/JC.png"> </div>
+      <div class="naipe" id="25"><img class="naipeImg" src="/img/cards/QC.png"> </div>
+      <div class="naipe" id="26"><img class="naipeImg" src="/img/cards/KC.png"> </div>
+
+      <div class="naipe" id="27"><img class="naipeImg" src="/img/cards/AD.png"> </div>
+      <div class="naipe" id="28"><img class="naipeImg" src="/img/cards/2D.png"> </div>
+      <div class="naipe" id="29"><img class="naipeImg" src="/img/cards/3D.png"> </div>
+      <div class="naipe" id="30"><img class="naipeImg" src="/img/cards/4D.png"> </div>
+      <div class="naipe" id="31"><img class="naipeImg" src="/img/cards/5D.png"> </div>
+      <div class="naipe" id="32"><img class="naipeImg" src="/img/cards/6D.png"> </div>
+      <div class="naipe" id="33"><img class="naipeImg" src="/img/cards/7D.png"> </div>
+      <div class="naipe" id="34"><img class="naipeImg" src="/img/cards/8D.png"> </div>
+      <div class="naipe" id="35"><img class="naipeImg" src="/img/cards/9D.png"> </div>
+      <div class="naipe" id="36"><img class="naipeImg" src="/img/cards/0D.png"> </div>
+      <div class="naipe" id="37"><img class="naipeImg" src="/img/cards/JD.png"> </div>
+      <div class="naipe" id="38"><img class="naipeImg" src="/img/cards/QD.png"> </div>
+      <div class="naipe" id="39"><img class="naipeImg" src="/img/cards/KD.png"> </div>
+
+      <div class="naipe" id="40"><img class="naipeImg" src="/img/cards/AS.png"> </div>
+      <div class="naipe" id="41"><img class="naipeImg" src="/img/cards/2S.png"> </div>
+      <div class="naipe" id="42"><img class="naipeImg" src="/img/cards/3S.png"> </div>
+      <div class="naipe" id="43"><img class="naipeImg" src="/img/cards/4S.png"> </div>
+      <div class="naipe" id="44"><img class="naipeImg" src="/img/cards/5S.png"> </div>
+      <div class="naipe" id="45"><img class="naipeImg" src="/img/cards/6S.png"> </div>
+      <div class="naipe" id="46"><img class="naipeImg" src="/img/cards/7S.png"> </div>
+      <div class="naipe" id="47"><img class="naipeImg" src="/img/cards/8S.png"> </div>
+      <div class="naipe" id="48"><img class="naipeImg" src="/img/cards/9S.png"> </div>
+      <div class="naipe" id="49"><img class="naipeImg" src="/img/cards/0S.png"> </div>
+      <div class="naipe" id="50"><img class="naipeImg" src="/img/cards/JS.png"> </div>
+      <div class="naipe" id="51"><img class="naipeImg" src="/img/cards/QS.png"> </div>
+      <div class="naipe" id="52"><img class="naipeImg" src="/img/cards/KS.png"> </div>
+
+    </div>
+
+
+    <!--OPERATIONS--------------------->
+    <div class="operations p-3 mb-2">
+
+
+
+
+
+      <!--INVERTIR---->
+      <button class="btn btn-outline-dark ml-1 " id="invertir" disabled> Inverse</button>
+
+      <!--CORTAR---->
+      <button class="btn btn-outline-dark ml-1" id="cut" disabled> Cut</button>
+
+      <!--FARO SHUFFLE EXT-->
+      <button class="btn btn-outline-dark  ml-1 " id="faroExt"> Out Faro</button>
+
+      <!--FARO SHUFFLE INT-->
+      <button class="btn btn-outline-dark  ml-1 " id="faroInt"> Int Faro</button>
+
+      <!--FARO SHUFFLE EXT PARCIAL-->
+      <button class="btn btn-outline-dark  ml-1 " id="faroExtPar" disabled> Partial Out Faro</button>
+
+      <!--FARO SHUFFLE INT PARCIAL-->
+      <button class="btn btn-outline-dark  ml-1 " id="faroIntPar" disabled> Partial Int Faro</button>
+
+      <!--ANTIFARO EXT-->
+      <button class="btn btn-outline-dark  ml-1" id="antifaroExt"> Out Antifaro</button>
+
+      <!--ANTIFARO INT-->
+      <button class="btn btn-outline-dark  ml-1" id="antifaroInt"> Int Antifaro</button>
+
+      <!--CHANGE CARD POSITION-->
+      <button class="btn btn-outline-dark ml-1  " id="change" disabled> Cull</button>
+      <!--CLEAR-->
+      <button class="btn btn-outline-dark  ml-1" id="clearLast" disabled> Clear last operation</button>
+
+    </div>
+    <div class="mb-3" style="text-align: center;">
+      ... click <a href="/">here</a> to see a guide on the different operations you can use!
+    </div>
+
+
+    <!--CURRENT COMBINATION--------------------------------------------->
+
+    <div class="card ml-2 border border-secondary">
+      <h5 class="card-header">Current combination</h5>
+      <div class=" d-flex flex-row border-top border-secondary">
+        <div class="card-body">
+          <span id="stackOrigen"> <strong>New Deck Order</strong> </span>
+          <span class="card-text" id="currentComb">
+
+          </span>
+          <span id="stackDestino">
+            <strong> </strong>
+
+          </span>
         </div>
 
-        
-      
-      <!--TAPETE ----------------------------------------------------------------->
+        <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
 
-         
+          <button class="btn-info mb-1 ml-1 mr-1 mt-1" id="downloadComb" disabled
+            title="Download file with this combination" onclick="download()">Download Combination</button>
 
-      <div class="selectable tapete p-3 mb-2 ml-5 mr-5 mt-2 text-white shadow-lg" 
-      title="Selected cards: 0" id="tool">
-        
-           <!--CARTAS--------------------->
-            
-            <div class="naipe" id="01"><img class="naipeImg" src="/img/cards/AH.png" > </div>
-            <div class="naipe" id="02"><img class="naipeImg" src="/img/cards/2H.png" > </div>
-            <div class="naipe" id="03"><img class="naipeImg" src="/img/cards/3H.png" > </div>
-            <div class="naipe" id="04"><img class="naipeImg" src="/img/cards/4H.png" > </div>
-            <div class="naipe" id="05"><img class="naipeImg" src="/img/cards/5H.png" > </div>
-            <div class="naipe" id="06"><img class="naipeImg" src="/img/cards/6H.png" > </div>
-            <div class="naipe" id="07"><img class="naipeImg" src="/img/cards/7H.png" > </div>
-            <div class="naipe" id="08"><img class="naipeImg" src="/img/cards/8H.png" > </div>
-            <div class="naipe" id="09"><img class="naipeImg" src="/img/cards/9H.png" > </div>
-            <div class="naipe" id="10"><img class="naipeImg" src="/img/cards/0H.png" > </div>
-            <div class="naipe" id="11"><img class="naipeImg" src="/img/cards/JH.png" > </div>
-            <div class="naipe" id="12"><img class="naipeImg" src="/img/cards/QH.png" > </div>
-            <div class="naipe" id="13"><img class="naipeImg" src="/img/cards/KH.png" > </div>
-  
-            <div class="naipe" id="14"><img class="naipeImg" src="/img/cards/AC.png" > </div>
-            <div class="naipe" id="15"><img class="naipeImg" src="/img/cards/2C.png" > </div>
-            <div class="naipe" id="16"><img class="naipeImg" src="/img/cards/3C.png" > </div>
-            <div class="naipe" id="17"><img class="naipeImg" src="/img/cards/4C.png" > </div>
-            <div class="naipe" id="18"><img class="naipeImg" src="/img/cards/5C.png" > </div>
-            <div class="naipe" id="19"><img class="naipeImg" src="/img/cards/6C.png" > </div>
-            <div class="naipe" id="20"><img class="naipeImg" src="/img/cards/7C.png" > </div>
-            <div class="naipe" id="21"><img class="naipeImg" src="/img/cards/8C.png" > </div>
-            <div class="naipe" id="22"><img class="naipeImg" src="/img/cards/9C.png" > </div>
-            <div class="naipe" id="23"><img class="naipeImg" src="/img/cards/0C.png" > </div>
-            <div class="naipe" id="24"><img class="naipeImg" src="/img/cards/JC.png" > </div>
-            <div class="naipe" id="25"><img class="naipeImg" src="/img/cards/QC.png" > </div>
-            <div class="naipe" id="26"><img class="naipeImg" src="/img/cards/KC.png" > </div>
-
-            <div class="naipe" id="27"><img class="naipeImg" src="/img/cards/AD.png" > </div>
-            <div class="naipe" id="28"><img class="naipeImg" src="/img/cards/2D.png" > </div>
-            <div class="naipe" id="29"><img class="naipeImg" src="/img/cards/3D.png" > </div>
-            <div class="naipe" id="30"><img class="naipeImg" src="/img/cards/4D.png" > </div>
-            <div class="naipe" id="31"><img class="naipeImg" src="/img/cards/5D.png" > </div>
-            <div class="naipe" id="32"><img class="naipeImg" src="/img/cards/6D.png" > </div>
-            <div class="naipe" id="33"><img class="naipeImg" src="/img/cards/7D.png" > </div>
-            <div class="naipe" id="34"><img class="naipeImg" src="/img/cards/8D.png" > </div>
-            <div class="naipe" id="35"><img class="naipeImg" src="/img/cards/9D.png" > </div>
-            <div class="naipe" id="36"><img class="naipeImg" src="/img/cards/0D.png" > </div>
-            <div class="naipe" id="37"><img class="naipeImg" src="/img/cards/JD.png" > </div>
-            <div class="naipe" id="38"><img class="naipeImg" src="/img/cards/QD.png" > </div>
-            <div class="naipe" id="39"><img class="naipeImg" src="/img/cards/KD.png" > </div>
-            
-            <div class="naipe" id="40"><img class="naipeImg" src="/img/cards/AS.png" > </div>
-            <div class="naipe" id="41"><img class="naipeImg" src="/img/cards/2S.png" > </div>
-            <div class="naipe" id="42"><img class="naipeImg" src="/img/cards/3S.png" > </div>
-            <div class="naipe" id="43"><img class="naipeImg" src="/img/cards/4S.png" > </div>
-            <div class="naipe" id="44"><img class="naipeImg" src="/img/cards/5S.png" > </div>
-            <div class="naipe" id="45"><img class="naipeImg" src="/img/cards/6S.png" > </div>
-            <div class="naipe" id="46"><img class="naipeImg" src="/img/cards/7S.png" > </div>
-            <div class="naipe" id="47"><img class="naipeImg" src="/img/cards/8S.png" > </div>
-            <div class="naipe" id="48"><img class="naipeImg" src="/img/cards/9S.png" > </div>
-            <div class="naipe" id="49"><img class="naipeImg" src="/img/cards/0S.png" > </div>
-            <div class="naipe" id="50"><img class="naipeImg" src="/img/cards/JS.png" > </div>
-            <div class="naipe" id="51"><img class="naipeImg" src="/img/cards/QS.png" > </div>
-            <div class="naipe" id="52"><img class="naipeImg" src="/img/cards/KS.png" > </div>
-    
-      </div>
-      
-
-      <!--OPERATIONS--------------------->
-      <div  class="operations p-3 mb-2">
-
-            
-       
-        
-
-          <!--INVERTIR---->        
-          <button class="btn btn-outline-dark ml-1 "  id="invertir" disabled> Inverse</button>
-
-          <!--CORTAR---->  
-          <button class="btn btn-outline-dark ml-1"  id="cut" disabled> Cut</button>
-
-          <!--FARO SHUFFLE EXT-->
-          <button class="btn btn-outline-dark  ml-1 " id="faroExt"> Out Faro</button>
-
-          <!--FARO SHUFFLE INT-->
-          <button class="btn btn-outline-dark  ml-1 " id="faroInt"> Int Faro</button>    
-          
-          <!--FARO SHUFFLE EXT PARCIAL-->
-          <button class="btn btn-outline-dark  ml-1 " id="faroExtPar" disabled> Partial Out Faro</button>
-
-          <!--FARO SHUFFLE INT PARCIAL-->
-          <button class="btn btn-outline-dark  ml-1 " id="faroIntPar" disabled> Partial Int Faro</button>
-          
-          <!--ANTIFARO EXT-->
-          <button class="btn btn-outline-dark  ml-1" id="antifaroExt" > Out Antifaro</button>
-
-          <!--ANTIFARO INT-->
-          <button class="btn btn-outline-dark  ml-1" id="antifaroInt" > Int Antifaro</button>
-
-           <!--CHANGE CARD POSITION-->
-           <button class="btn btn-outline-dark ml-1  " id="change" disabled> Cull</button>
-          <!--CLEAR-->
-          <button class="btn btn-outline-dark  ml-1" id="clearLast" disabled> Clear last operation</button>
-        
-      </div>
-      <div class="mb-3" style="text-align: center;">
-        ... click <a href="/">here</a> to see a guide on the different operations you can use!
-          </div>
-     
-
-      <!--CURRENT COMBINATION--------------------------------------------->
-      
-      <div class="card ml-2 border border-secondary"  >
-        <h5 class="card-header">Current combination</h5>
-        <div class=" d-flex flex-row border-top border-secondary">
-          <div class="card-body" >
-            <span id="stackOrigen"> <strong>New Deck Order</strong> </span>
-            <span class="card-text" id="currentComb"> 
-              
-            </span>
-            <span id="stackDestino"> 
-              <strong> </strong>
-
-            </span>
-          </div>
-            
-          <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
-              
-              <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="downloadComb" disabled title="Download file with this combination" onclick="download()"  >Download Combination</button>
-              
-          </div>
         </div>
       </div>
-        
-       
-      <!--YOUR COMBINATIONS------------------------------------------------------------------->
+    </div>
 
-        <div class="card ml-2 mt-1 mb-2 border border-secondary">
-          <h5 class="card-header"> Imported combination </h5>
-          <div class=" d-flex flex-row border-top border-secondary">
-          <div class="card-body border-top border-secondary">
-            <div class="card-text" class="dropzone" id="dropzone" > 
-              <div id="content-target" class="displayarea" > 
-                
-                
-              </div>
-        
-              <div class="custom-file" id="uploadComb">
-                <label class="custom-file-label" for="input-file" >Drag here a .txt file to import a combination or click browse</label><br>
-                <input class="custom-file-input" type="file" id="input-file">
-               </div>
 
-              </div>
-            
+    <!--YOUR COMBINATIONS------------------------------------------------------------------->
+
+    <div class="card ml-2 mt-1 mb-2 border border-secondary">
+      <h5 class="card-header"> Imported combination </h5>
+      <div class=" d-flex flex-row border-top border-secondary">
+        <div class="card-body border-top border-secondary">
+          <div class="card-text" class="dropzone" id="dropzone">
+            <div id="content-target" class="displayarea">
+
+
+            </div>
+
+            <div class="custom-file" id="uploadComb">
+              <label class="custom-file-label" for="input-file">Drag here a .txt file to import a combination or click
+                browse</label><br>
+              <input class="custom-file-input" type="file" id="input-file">
+            </div>
+
           </div>
-          <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
-              
-            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="performComb" disabled title="Automatically performs combination" onclick="performCombination()"  >Perform Combination</button>
-            <button class="btn-info mb-1 ml-1 mr-1 mt-1"  id="clearImpComb" disabled title="Clear combination" onclick="clearImp()"  >Clear</button>
-            
-        </div>
-      </div> 
-        </div>
 
-    
-      <!--<main>
+        </div>
+        <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
+
+          <button class="btn-info mb-1 ml-1 mr-1 mt-1" id="performComb" disabled
+            title="Automatically performs combination" onclick="performCombination()">Perform Combination</button>
+          <button class="btn-info mb-1 ml-1 mr-1 mt-1" id="clearImpComb" disabled title="Clear combination"
+            onclick="clearImp()">Clear</button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!--<main>
         <h2>Changesets</h2>
         <div class="dropzone" id="dropzone">Drop .json files here to convert</div>
         <div class="displayarea" id="displayarea"></div>
         
-      </main>--> 
-    </div>  
+      </main>-->
+  </div>
 </body>
 
+<%- include("partials/footer")%>
 <!--FUNCIONES--------------------------------------------------------------------------------->
 
-  <!--JQUERY -------------------------->
-<script
-src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-crossorigin="anonymous"></script>
+<!--JQUERY -------------------------->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
+<script
+  src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
@@ -247,5 +253,5 @@ crossorigin="anonymous"></script>
 </script>
 
 
-<%- include("partials/footer")%>
+
 </html>
