@@ -64,10 +64,11 @@ function checkCurrDeck (){
       return;
     }
   }   
-  divDestino.text("Mnemonica").css( 'font-weight', 'bold' );
+  divDestino.text("→ Mnemonica").css( 'font-weight', 'bold' );
   
 }
 
+//The name of this function should be "disableAndAbleButtons"
 function disableButtons (){
      $('#cut').prop("disabled",true);
      $('#invertir').prop("disabled",true);
@@ -78,9 +79,22 @@ function disableButtons (){
      $('#antifaroInt').prop("disabled",false);
      $('#antifaroExt').prop("disabled",false);
      $('#clearLast').prop("disabled",false);
-     $('#downloadComb').prop("disabled",false);
+     $('#downloadComb').prop("disabled",false);     
 
-     
+}
+
+function disableAllButtons (){
+  console.log("Disabling buttons...")
+  $('#cut').attr("disabled",true);
+  $('#invertir').attr("disabled",true);
+  $('#faroExtPar').attr("disabled",true);
+  $('#faroIntPar').attr("disabled",true);
+  $('#faroExt').attr("disabled",true);
+  $('#faroInt').attr("disabled",true);
+  $('#antifaroInt').attr("disabled",true);
+  $('#antifaroExt').attr("disabled",true);
+  $('#clearLast').attr("disabled",true);
+  $('#downloadComb').attr("disabled",true);  
 
 }
 
@@ -151,11 +165,11 @@ function addCurrentText(){
   ORIGIN STACK -----------------------------------------------------------------------------
 
 */
-
-$('#apply_stack').on('click', function () {
-  var stck = $('#stacks').val()
+function apply_stack(stck){
+  
   divOrigen.text(stck).css( 'font-weight', 'bold' );
   divCurr.text("");
+  divDestino.text("");
   
     $(".ui-selected").each(function(index,element) {
       element.classList.remove("ui-selected");
@@ -165,22 +179,33 @@ $('#apply_stack').on('click', function () {
       sortDom(newdeckorder);
     }
 
-    if (stck == "Randomly Shuffled"){
+    else if (stck == "Randomly Shuffled"){
       shuffle();
     }
-    if (stck == "Mnemonica"){
+    else if (stck == "Mnemonica"){
       sortDom(mnemonica);  
       
     }
 
-    if (stck == "New Deck Order 1"){
+    else if (stck == "New Deck Order 1"){
       sortDom(newdeckorder1);
     }
-    if (stck == "New Deck Order 2"){
+    else if (stck == "New Deck Order 2"){
       sortDom(newdeckorder2);
     }
+    else {
+      console.log("Stack not known")
+    }
     combinationArr=[]
-});
+}
+
+
+
+$('#apply_stack').on('click',function(){
+  var stck = $('#stacks').val()
+  apply_stack(stck)
+
+} );
 
 /*
   OPERACIONES -------------------------------------------------------------------------------------
@@ -213,6 +238,7 @@ $('#apply_stack').on('click', function () {
 
   });
 
+ 
 
 
 //---------------------------- INVERTIR--------------------------
@@ -237,12 +263,17 @@ function inverse(num) {
    
 }
 
-  $('#invertir').on('click',function(){
-    var num = $(".ui-selected .naipeImg").length
-    inverse(num)
+function inverseComplete(num){
+  inverse(num)
     combinationArr.push("inverse " + num);
     addCurrentText()
     $('#tool').attr('title', "Selected cards: 0");
+
+}
+
+  $('#invertir').on('click',function(){
+    var num = $(".ui-selected .naipeImg").length
+    inverseComplete(num)
 
   } );
 
@@ -251,15 +282,9 @@ function inverse(num) {
 
 
  function cut (num) {
-    
-
-    
-
     $( ".naipe" ).each(function(index,element) {
-      
       if(index<num){
         $( ".tapete div:nth-child(1)" ).insertAfter( $( ".tapete div:nth-child(52)" ) );
-        
       }
     })
 
@@ -267,15 +292,19 @@ function inverse(num) {
      disableButtons()
      checkCurrDeck()
      
-
   }
 
-  $('#cut').on('click', function(){
-    var num = $(".ui-selected .naipeImg").length
+  function cutComplete(num){
+    
     cut(num)
     combinationArr.push("cut " + num);
     addCurrentText()
     $('#tool').attr('title', "Selected cards: 0");
+  }
+
+  $('#cut').on('click', function(){
+    var num = $(".ui-selected .naipeImg").length
+    cutComplete(num);
   } );
 
 
@@ -294,11 +323,15 @@ function inverse(num) {
     sortDom(arr)
 
   }
-  $('#faroExt').on('click', function () {
+
+  function faroExtComplete(){
     faroExt()
     combinationArr.push("faroext");
     addCurrentText()
     $('#tool').attr('title', "Selected cards: 0");
+  }
+  $('#faroExt').on('click', function () {
+    faroExtComplete()
     
   });
 
@@ -319,13 +352,18 @@ function faroInt(){
     sortDom(arr)
 
 }
-  $('#faroInt').on('click', function () {
+
+function faroIntComplete(){
+  faroInt()
+  combinationArr.push("faroint");
+  addCurrentText()
+  $('#tool').attr('title', "Selected cards: 0");
+}
+
+$('#faroInt').on('click', function () {
+   faroIntComplete() 
     
-    faroInt()
-    combinationArr.push("faroint");
-    addCurrentText()
-    $('#tool').attr('title', "Selected cards: 0");
-  });
+});
 
 
 
@@ -346,16 +384,17 @@ function faroInt(){
 
   }
 
-  $('#faroExtPar').on('click', function () {
-    
-
-    var num = $(".ui-selected .naipeImg").length
+  function faroExtParComplete(num){
     faroExtPar(num)
-    
-    
     combinationArr.push("faroextpar "  + num);
     addCurrentText()
     $('#tool').attr('title', "Selected cards: 0");
+
+  }
+  $('#faroExtPar').on('click', function () {
+    var num = $(".ui-selected .naipeImg").length
+    faroExtParComplete(num)
+    
   });
 
 
@@ -377,15 +416,18 @@ function faroInt(){
     sortDom(arr)
   }
 
-  $('#faroIntPar').on('click', function () {
-
-    var num = $(".ui-selected .naipeImg").length
-
+  function faroIntParComplete(num){
     faroIntPar(num)
-    
     combinationArr.push("farointpar"  + num);
     addCurrentText()
     $('#tool').attr('title', "Selected cards: 0");
+  }
+
+  $('#faroIntPar').on('click', function () {
+
+    var num = $(".ui-selected .naipeImg").length
+    faroIntParComplete(num)
+    
     
   });
 
@@ -408,13 +450,16 @@ function faroInt(){
     disableButtons()
 
   }
-  $('#antifaroExt').on('click', function () {
 
-    
+  function antifaroExtComplete(){
     antifaroExt()
     combinationArr.push("antifaroext" );
     addCurrentText()
     $('#tool').attr('title', "Selected cards: 0");
+
+  }
+  $('#antifaroExt').on('click', function () {
+    antifaroExtComplete()
     
   });
 
@@ -435,13 +480,16 @@ function antifaroInt(){
   disableButtons()
 
 }
-$('#antifaroInt').on('click', function () {
 
+function antifaroIntComplete(){
   antifaroInt()
   combinationArr.push("antifaroint" );
   addCurrentText()
   $('#tool').attr('title', "Selected cards: 0");
-  
+}
+
+$('#antifaroInt').on('click', function () {
+  antifaroIntComplete()
 });
 
 
@@ -531,8 +579,9 @@ $('#clearLast').on('click', function () {
     $('#clearLast').prop("disabled",true);
     $('#downloadComb').prop("disabled",true);
   }
+
   addCurrentText()
-  
+  timeoutSelected()
   //Si combinationArr vacio boton desactivado, o si curretn combination ya no tiene nada, desativado
  //... Así con todas las fucniones
  //Borramos de Current combination
@@ -841,28 +890,91 @@ function clearImp(){
 
 }())
 
-function performCombination(){
-  const input = event.target
-  readFileContent(input.files[0]).then(content => {
-  
-    origin = content.substring(0, content.indexOf('→')); 
-    rest = content.substring(content.indexOf('→'), content.length)
-    console.log(origin)
-    console.log(rest)
-    
-    
-    /*
-    Content es un string con la info, aquí hay que hacer una serie
-    de comprobaciones para que se vea que lo que se arrastra es una combinación
-    y no otras cosas. Hacerlo por tamaño, si tiene más de x caracteres no deja
+function performCombination() {
+  content = $('#content-target')[0].innerText
+  origin = $.trim(content.substring(0, content.indexOf('→')));
+  rest = content.substring(content.indexOf('→'), content.length)
 
-    Además habrá que cortar el string ese que no es parte de la combinación
+  var array = (rest.split('→'));
+  array.splice(0, 1);
+  array.pop()
 
-    Comprobación de que es un .txt donde va? No admitir otros formatos
+  //disableAllButtons() //No funciona, solo si modifico que las operaciones siguientes no llamen a disableButtons()
+  window.scrollTo({ top: 100, behavior: 'smooth' })
 
+  setTimeout(() => { apply_stack(origin) }, 1000);
+  array.forEach(function (operation, index) {
+    time = 2000 + index * 1000
+    operation = $.trim(operation)
+    if (hasNumbers(operation) && operation.includes('(')) {
+      if (operation.includes("Out")) {
 
-    */
-  	target.innerHTML = '<strong>'+ origin +'</strong>'+rest
-  }).catch(error => console.log(error))
+        setTimeout(() => {
+          thenum = operation.match(/\d+/)[0]
+          faroExtParComplete(thenum)
+        }, time);
+
+      }
+      else if (operation.includes("Int")) {
+
+        setTimeout(() => {
+          thenum = operation.match(/\d+/)[0]
+          faroIntParComplete(thenum)
+        }, time);
+
+      }
+    }
+    else if (hasNumbers(operation) && operation.includes('cards')) {
+      thenum = operation.match(/\d+/)[0]
+      if (operation.includes("Cut")) {
+        setTimeout(() => {
+          thenum = operation.match(/\d+/)[0]
+          cutComplete(thenum)
+        }, time);
+      }
+      else if (operation.includes("Inverse")) {
+        setTimeout(() => {
+          thenum = operation.match(/\d+/)[0]
+          inverseComplete(thenum)
+        }, time);
+      }
+    }
+    else {
+      if (operation == "Out Faro") {
+        setTimeout(() => { faroExtComplete() }, time);
+      }
+      else if (operation == "Int Faro") {
+        setTimeout(() => { faroIntComplete() }, time);
+      }
+      else if (operation == "Out Antifaro") {
+        setTimeout(() => { antifaroExtComplete() }, time);
+      }
+      else if (operation == "Int Antifaro") {
+        setTimeout(() => { antifaroIntComplete() }, time);
+      }
+    }
+
+  });
+
+  disableButtons()
+
 }
-  
+
+function hasNumbers(t) {
+  var regex = /\d/g;
+  return regex.test(t);
+}    
+
+
+function reduceComb(){
+  combinationArr.forEach(function (operation, index) {
+    if(combinationArr[index].includes("Cut") && combinationArr[index+1].includes("Cut")){
+      num1 = combinationArr[index].match(/\d+/)[0]
+      num2 = combinationArr[index+1].match(/\d+/)[0]
+      numToCut = num1 + num2
+      if (numToCut>52){
+        console.log("Cut to "+ (numToCut-52))
+      }
+    }
+  })
+}

@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DeckLab</title>
-</head>
-<body>
     <%- include("partials/head")%>
-    <%- include("partials/navigation") %>
+</head>
+<%- include("partials/navigation") %>
+<body>
+    
+    
     <div class="p-3 mb-2 ml-5 mr-5 mt-3">
         <h3>Welcome to DeckLab!</h3>
 
@@ -61,22 +63,35 @@
 
 
 <!--
-
+Para los mensajes encima del tapete que aparecen y desaparecen:
+https://www.jose-aguilar.com/blog/hacer-desaparecer-aparecer-div-tras-segundos-con-jquery/
     0. Que a la dropzone de combination solo se pueda arrastrar .txt y poner límites de tamaño
     1. Que al arrastrar combinación ponga el titulo al lado de "Imported combination"
-    2. Implementar perform combination (se desactivan todos los botones cuando está funcionando)
+    2. Implementar perform combination (se desactivan todos los botones cuando está funcionando). Opcion
+    de hacerlo rapido o lento (que cuando le des subas la página sola a una vista donde se ve a la vez
+    current combination y la baraja)
     3. Hacer dropzone con cartas y que se añada opcion al desplegable
     4. Que al hacer click en download stack se descargue la imagen del div
     5. Añadir favicon: un par de cartas
     6. Que al llegar a un stack salga sobre el tapete un mensaje. En checkCurrent()
     7. Implementar cull con jquery sorteable. "Now cull the cards you want" encima del tapete
-    de manera intermitente
+    de manera intermitente. Si no consigo hacerlo con jquery sorteable, se puede hacer
+    que primero seleccione la carta y luego seleccione el lugar y se lleva la carta a ese lugar
     8. Boton de reducir combinación. Preguntar al usuario si quiere que se reduzca su combinación antes de 
-   que la descargue. Si ya la ha reducido no preguntar
-    9. Hacer que los botones de current combination y imported no cambien de tamaño
-    8. Pasarlo a un nuevo proyecto limpio y con las dependencias necesarias
-    9. Arreglar que aparezca la pagina sin estilos antes que la pagina
-    10. Hacer que la pagina principal tenga intrucciones y mandar a magos para que lo prueben
+   que la descargue. Si ya la ha reducido no preguntar. Que cuando descargues combinacion se descarguen las que
+   son equivalentes y del mismo número de pasos?
+    9. Mensajes para que hagan click dentro de lo verde? Quizás usando los mensajes del div
+    parpadeantes encima de la baraja y con una flecha
+    10. Hacer que cuando se haga resize() se quede en el mismo tamaño
+    11. Que al guardar te de la opción de cambiar el nombre
+    12. Hacer que los botones de current combination y imported no cambien de tamaño
+    13. Meter instrucciones que no haya que leer, es decir, cuando quieras seleccionar cartas
+    y sin querer pinches fuera del tapete, que salga un cuadrito de pincha aquí... que los
+    botones al ponerte encima expliquen por qué están desactivados. Que todo se auto-explique
+    además de explicarse en la página de entrada
+    14. Hacer que la pagina principal tenga intrucciones y mandar a magos para que lo prueben
+
+    
 
     ---------Mejoras------------
     -Que al lado del ratón salga el número de la carta. Usar tooltip?
@@ -91,6 +106,7 @@
     -------Futuro------------   
     
     Buscar todas las combinaciones que se sepan. Que en cada lab haya un link que te lleva a la parte de la pestaña que tiene la info que se sabe de lo descubierto en ese lab.
+    En ALgorithm o como se llame esa tab, hay un card con muchas pestañas de lo que se sabe de cada lab
     Barajas incompletas (Pensar en qué labs tienen sentido estas barajas)
 
     Para cuando el usuario pinche fuera sin querer:
@@ -100,7 +116,8 @@
     14. Esconder codigo cliente 
     https://code-boxx.com/hide-javascript-code-from-client/
 
-
+    Para que se encuentre el google: poner eso en
+    algún sitio You may have found this site by searching for random card generator, deck of cards, random number, virtual playing cards, online cards, internet cards, mobile cards, full screen deck, card dealing, randomizer, coin flip, or dice. 
 
     Que el lab cambie para hacer distintos estudios: (nuevos botones o ver qué cambios hay que hacer)
     Que haya una parte común a todos (descargar baraja, el tapete igual...)
@@ -118,7 +135,7 @@
     otra... etc. Shuffle lab con mezcla americana y arrastre, que puedas controlar mezclas, marcar cartas y calcular posibilidades
     - Preguntar por más opciones!
 
-
+    Implementar un bot para la página para resolver dudas: https://core.telegram.org/bots/samples 
 
 Para el algoritmo, combinaciones más fáciles que descubrir:
 Probar algoritmo de ben joffe a ver si se  descubre rápido.
@@ -131,4 +148,7 @@ homologas una al lado de la otra, buscar cosas de poker (mnemonica a dar escaler
 MNemonica a 8king o si stebbins ya que son muchas distintas. 
 Mnemonica a parcial aronson, o viceversa
 Hacerlo con todas las operaciones pero solo probando 3 pasos. INcluida la operación de repartir una mano de poker
+
+Para el algoritmo: Poner la carta x en la posición y es lo mismo que:
+Cortar por x -> Invertir y -> Invertir (y-1)
 -->

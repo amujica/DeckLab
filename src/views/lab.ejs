@@ -40,8 +40,8 @@
           <option value="Mnemonica">Mnemonica</option>
           <option value="Aronson">Aronson</option>
           <option value="New Deck Order">New Deck Order</option>
-          <option value="New Deck Order 1">New Deck Order (1)</option>
-          <option value="New Deck Order 2">New Deck Order (2)</option>
+          <option value="New Deck Order 1">New Deck Order 1</option>
+          <option value="New Deck Order 2">New Deck Order 2</option>
           <option value="Eight Kings">Eight Kings</option>
           <option value="Randomly Shuffled">Randomly Shuffled</option>
           <option value="Si Stebbins">Si Stebbins</option>
@@ -173,19 +173,22 @@
         <div class="card-body">
           <span id="stackOrigen"> <strong>New Deck Order</strong> </span>
           <span class="card-text" id="currentComb">
-
+    
           </span>
           <span id="stackDestino">
             <strong> </strong>
-
+    
           </span>
         </div>
-
+    
         <div class="mb-2 ml-1 mr-2 mt-2" style="text-align: center; display: flex; flex-direction: column;">
-
+    
           <button class="btn-info mb-1 ml-1 mr-1 mt-1" id="downloadComb" disabled
             title="Download file with this combination" onclick="download()">Download Combination</button>
-
+    
+          <button class="btn-info mb-1 ml-1 mr-1 mt-1" id="reduceComb" 
+            title="Reduce combination so it has less steps" onclick="reduceComb()">Reduce Combination</button>
+    
         </div>
       </div>
     </div>

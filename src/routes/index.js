@@ -29,10 +29,6 @@ router.get('/about', (req, res) => {
 });
 
 
-router.get('/profile', (req, res) => {
-    
-    res.render('profile');
-});
 
 router.get('/contact', (req, res) => {
     
