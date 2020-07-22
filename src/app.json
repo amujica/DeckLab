@@ -1,0 +1,7 @@
+{
+    "name":"deckLab",
+    "description":"Digital deck for magicians",
+    "repository":"https://github.com/amujica/DeckLab",
+    "logo": "https://github.com/amujica/DeckLab/blob/master/src/public/img/logo.png",
+    "image":"heroku/nodejs"
+}
